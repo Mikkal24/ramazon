@@ -2,10 +2,10 @@ const {OperationHelper} = require('apac');
 //var parseString = require('xml2js').parseString;
 
 const opHelper = new OperationHelper({
-	awsId: 'AKIAIR3WJ4VCLLYEGLLQ',
-	//awsId:     '940733266516',
-    awsSecret: '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',
-    assocId:   'atchotes-20'
+	awsId: '',
+	//awsId:     '',
+    awsSecret: '',
+    assocId:   ''
 });
 
 var randomPage = Math.floor((Math.random()*10)+1);
