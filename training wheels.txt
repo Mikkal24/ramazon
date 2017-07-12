@@ -1,0 +1,99 @@
+<!DOCTYPE html> 
+<html>
+
+<head>
+<title> </title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {background-color: rgb(20, 110, 180);
+   }
+  h1 {color:white;}
+  p {color: black;}
+.howitworks { color:rgb(255, 153, 0);}
+.size{color:rgb(255, 153, 0);}
+.interests{color:rgb(255, 153, 0);}
+.where {color:rgb(255, 153, 0);}
+</style>
+</head>
+
+
+<script>
+document.getElementById(" ").innerHTML = var
+
+</script>
+
+<body style >
+<h1> RAMAZON </h1>
+<div class="howitworks">
+
+
+</div>
+
+	<div class="interests">
+<h3> STEP 1: Pick Your Interests</h3>
+	<br>
+	<form>
+<table style="width:100%">
+<tr>
+ 	<td><input type="checkbox" name="Sports" value="Sports & Outdoors" unchecked> Sports</td><br></td>
+	<td><input type="checkbox" name="Electronics" value="Sports & Outdoors" unchecked> Electronics<br></td>
+	<td><input type="checkbox" name="Clothes" value="Clothing" unchecked>Clothes<br></td>
+	<td><input type="checkbox" name="Games" value="Video Games" unchecked> Video Games<br></td>
+</tr>	
+<tr>
+	<td><input type="checkbox" name="Electronics" value="Sports & Outdoors" unchecked> Electronics<br></td>
+	<td><input type="checkbox" name="Electronics" value="Sports & Outdoors" unchecked> Electronics<br>	</td>
+	<td><input type="checkbox" name="Electronics" value="Sports & Outdoors" unchecked> Electronics<br></td>
+	<td><input type="checkbox" name="Electronics" value="Sports & Outdoors" unchecked> Electronics<br></td>
+	<td><input type="checkbox" name="Electronics" value="Sports & Outdoors" unchecked> Electronics<br></td>
+	</tr>
+	</table>
+
+	<input type="submit" value="Pick">
+</form>
+</div>
+
+<br>
+
+<div class="size">
+<h3> STEP 2: Pick How Much Stuff<h3>
+<br>
+	<form>
+ 	<input type="checkbox" name="Some" value="Sports & Outdoors" unchecked> Some Stuff $20<br>
+	<input type="checkbox" name="More" value="Sports & Outdoors" unchecked> More Stuff $50<br>
+	<input type="checkbox" name="All" value="Clothing" unchecked> All the Stuff $100<br>
+	<input type="checkbox" name="Monthly" value="Custom Stuff" unchecked> Monthly Stuff<br>	
+	Custom Stuff<input type="text" name="Custom"> <br>	
+	
+<input type="submit" value="Submit">
+</form> 
+</div>
+
+<div class="where">
+	<h3> STEP 2: Tell us where to send your Stuff<h3>
+<br>
+<form>
+ 		<table>
+<tr><td>First Name:</td> <td>Last Name:</td></tr>
+    
+<tr><td><input type="text" name="First Name"></td><td><input type="text" name="Last Name"></td></tr>
+    
+<tr><td>Address Line 1:</td><td>Address Line 2(optional):</td></tr>
+    
+<tr><td><input type="text" name="Address Line 1" required></td>
+<td><input type="text" name="Address Line 2"> </td></tr>
+    
+<tr><td>City:</td><td>State:</td><td>Zip:</td></tr>
+<tr><td><input type="text" name="City" required></td><td><input type="text" name="State" required></td><td><input type="text" name="Zip" required></td></tr>
+		
+	</table>
+<input type="submit" value="Submit">
+</form> 
+</div>
+
+</body>
+
+
+</html>
+
+
