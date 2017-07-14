@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Mikkal24/ramazon#readme",
   "dependencies": {
-    "apac": "^3.0.2"
+    "apac": "^3.0.2",
+    "opn": "^5.1.0"
   }
 }
