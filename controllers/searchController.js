@@ -5,9 +5,9 @@ const {OperationHelper} = require('apac');
 
 //Static stuff
 const opHelper = new OperationHelper({
-	awsId: 'AKIAIR3WJ4VCLLYEGLLQ',
-    awsSecret: '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',
-    assocId:   'atchotes-20'
+	awsId: '',
+    awsSecret: '',
+    assocId:   ''
 });
 
 var indexArray = [
