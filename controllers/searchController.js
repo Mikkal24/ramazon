@@ -5,9 +5,9 @@ const {OperationHelper} = require('apac');
 
 //Static stuff
 const opHelper = new OperationHelper({
-	awsId: '',
-    awsSecret: '',
-    assocId:   '',
+	awsId: 'AKIAIR3WJ4VCLLYEGLLQ',
+    awsSecret: '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',
+    assocId:   'atchotes-20',
     maxRequestsPerSecond: 1
 });
 
@@ -22,17 +22,13 @@ var indexArray = [
 	'Electronics',
 	'Fashion',
 	'GiftCards',
-	//'Grocery',
 	'Handmade',
 	'HealthPersonalCare',
 	'HomeGarden',
 	'Industrial',
-	//'KindleStore',
 	'LawnAndGarden',
 	'Luggage',
 	'Magazines',
-	//'Marketplace',
-	//'Merchants',
 	'MobileApps',
 	'Movies',
 	'Music',
@@ -46,7 +42,6 @@ var indexArray = [
 	'Tools',
 	'Toys',
 	'UnboxVideo',
-	//'Vehicles',
 	'VideoGames',
 	'Wine',
 	'Wireless']
@@ -86,6 +81,48 @@ router.get("/", function(req,res){
 		res.send(err);
 	    console.error("Something went wrong! ", err);
 	});
+})
+
+router.post("/", function(req,res){
+	console.log(req.body);
+	var randomPage = Math.floor((Math.random()*9)+1);
+	var searchIndex;
+	console.log("=>"+req.body.SearchIndex+"<=");
+	if (typeof req.body.SearchIndex !== 'string'){
+		searchIndex = req.body.SearchIndex[Math.floor(Math.random()*req.body.SearchIndex.length)];
+	} else {
+		searchIndex = req.body.SearchIndex;
+	}
+	
+	opHelper.execute('ItemSearch', {
+	  'SearchIndex': searchIndex,
+	  'Keywords': ' ',
+	  'ItemPage': randomPage,
+	  'Availability': 'Available',
+	  'MaximumPrice': req.body.range*100,
+	  'MinimumPrice': (req.body.range*100)-100,
+	  'ResponseGroup': 'ItemAttributes,Offers,Images'
+	}).then((response) => {
+		//Here we're console logging the arguments we entered just to make sure everything is interpreted correctly
+		var argArray = response.result.ItemSearchResponse.OperationRequest.Arguments.Argument;
+		for (var i = 0; i<argArray.length; i++){
+			console.log(i+": "+"Name: "+argArray[i].$.Name+" | Value: "+argArray[i].$.Value);
+		}
+		console.log("-------------------------------------");
+		console.log(response.result);
+	    console.log("-------------------------------------");
+	    //Then we have to pick one of the ten results to display
+	    var pickOne = Math.floor(Math.random()*response.result.ItemSearchResponse.Items.Item.length);
+	    
+	    var item = response.result.ItemSearchResponse.Items.Item[pickOne];
+	    
+	    res.json(item);
+	}).catch((err) => {
+		//if there are any errors
+		res.send(err);
+	    console.error("Something went wrong! ", err);
+	});
+
 })
 
 module.exports = router;
