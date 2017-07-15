@@ -7,7 +7,8 @@ var router = new express.Router();
 router.use("/search", searchRoutes);
 
 router.get("*", function(req,res){
-	res.sendFile(path.join(__dirname,"../public/index.html"));
+	//res.sendFile(path.join(__dirname,"../public/index.html"));
+	res.sendFile(path.join(__dirname,"../public/display.html"));
 });
 
 module.exports = router;
