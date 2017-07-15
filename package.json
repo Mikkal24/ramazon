@@ -18,6 +18,8 @@
   "homepage": "https://github.com/Mikkal24/ramazon#readme",
   "dependencies": {
     "apac": "^3.0.2",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
     "opn": "^5.1.0"
   }
 }
