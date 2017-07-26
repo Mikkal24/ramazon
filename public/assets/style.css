@@ -7,6 +7,7 @@ body {
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
+    font-family: Verdana;
 }
 
 h1 {
@@ -14,18 +15,30 @@ h1 {
 }
 p {
 	color: black;
+	width:75%;
 }
 .howitworks {
 	color: rgb(255, 153, 0);
+	background: rgba(179, 179, 204, 0.2);
+	border-radius: 15px;
 }
 .size{
 	color: rgb(255, 153, 0);
+	width:75%;
+	background: rgba(179, 179, 204, 0.2);
+	border-radius: 15px;
 }
 .interests{
 	color: rgb(255, 153, 0);
+	width:75%;
+	background: rgba(179, 179, 204, 0.2);
+	border-radius: 15px;
 }
 .where {
 	color: rgb(255, 153, 0);
+	width:75%;
+	background: rgba(179, 179, 204, 0.2);
+	border-radius: 15px;
 }
 
 #indexTable {
