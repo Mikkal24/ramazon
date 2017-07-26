@@ -46,7 +46,11 @@ p {
     padding: 20px; 
     width: 100px;
     height: 100px;
-    float: left;
+    float: right;
+    position: relative;
+    margin: 0px;
+    !important;
+}
 }
 #indexTable {
 	columns: 3;
