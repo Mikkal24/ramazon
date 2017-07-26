@@ -40,7 +40,14 @@ p {
 	background: rgba(179, 179, 204, 0.2);
 	border-radius: 15px;
 }
-
+.randomMoon {
+    border-radius: 100%;
+    background: #73AD21;
+    padding: 20px; 
+    width: 100px;
+    height: 100px;
+    float: left;
+}
 #indexTable {
 	columns: 3;
 }
