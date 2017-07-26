@@ -1,147 +1,49 @@
-<!DOCTYPE html> 
-<html>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Ramazon</title>	
 
-<head>
-	<title> Ramazon </title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<!-- JQuery -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<link  rel="stylesheet" type="text/css" href="assets/style.css">
-	<!-- jQuery Form -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.1/jquery.form.min.js" integrity="sha384-tIwI8+qJdZBtYYCKwRkjxBGQVZS3gGozr3CtI+5JF/oL1JmPEHzCEnIKbDbLTCer" crossorigin="anonymous"></script>
-    
-     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-  $( function() {
-    $( "#accordion" ).accordion();
-  } );
-  </script>
-	
-</head>
+		<!-- JQuery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!-- Compiled and minified CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
 
+		<!-- Compiled and minified JavaScript -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>		
 
-
-<body>
-	<h1> RAMAZON </h1>
-    
-<div class="howitworks">
-</div>
-
-
-	<form id="queryForm" action="/search" method="post"><div id="accordion">
-<div class="interests" ><h3> STEP 1: Pick Your Interests</h3>
-	
-	
-</div>	
-	<select style="width:100%" id="indexTable" name="SearchIndex" multiple></select>
 		
+	</head>
 
-
-
-<div class="size">
-	<h3> STEP 2: Pick How Much Stuff</h3>	
-		<br></div>
- 	<p>	<input type="checkbox" name="range" value="20" > Some Stuff $20<br>
-		<input type="checkbox" name="range" value="50" > More Stuff $50<br>
-		<input type="checkbox" name="range" value="100" > All the Stuff $100<br></p>
-
-</form>
- 
-
-	<h3> STEP 3: Tell us where to send your Stuff</h3>
-	<div class="where"><br>
-	<form>
- 		<table>
-			<tr><td>First Name:</td> <td>Last Name:</td></tr>
-    
-			<tr><td><input type="text" name="First Name"></td><td><input type="text" name="Last Name"></td></tr>
-    
-			<tr><td>Address Line 1:</td><td>Address Line 2(optional):</td></tr>
-    
-			<tr><td><input type="text" name="Address Line 1" required></td>
-			<td><input type="text" name="Address Line 2"> </td></tr>
-    
-			<tr><td>City:</td><td>State:</td><td>Zip:</td></tr>
-			<tr><td><input type="text" name="City" required></td><td><input type="text" name="State" required></td><td><input type="text" name="Zip" required></td></tr>
-		
-		</table>
-		<input type="submit" value="Submit">
-	</form> </div>
-
-
-<div class="container">
-	<div class="center-align" id="target"></div>
-</div>
-
-<script>
-var indexArray = [
-	'Appliances',
-	'ArtsAndCrafts',
-	'Automotive',
-	'Baby',
-	'Beauty',
-	'Books',
-	'Collectibles',
-	'Electronics',
-	'Fashion',
-	'GiftCards',
-	'Handmade',
-	'HealthPersonalCare',
-	'HomeGarden',
-	'Industrial',
-	'LawnAndGarden',
-	'Luggage',
-	'Magazines',
-	'Movies',
-	'Music',
-	'MusicalInstruments',
-	'OfficeProducts',
-	'Pantry',
-	'PCHardware',
-	'PetSupplies',
-	'SportingGoods',
-	'Tools',
-	'Toys',
-	'VideoGames',
-	'Wine',
-	'Wireless']
-	$(document).ready(function(){
-		for(var i=0;i<indexArray.length;i++){
-			var newListItem = $("<option>").attr({
-				"value": indexArray[i]
+	<body>
+		<div class="container">
+			<div class="center-align" id="target"></div>
+		</div>
+		<script>
+			$(document).ready(function(){
+				search();
 			});
-			newListItem.text(indexArray[i])
-			$("#indexTable").append(newListItem);
-		}
-	})
-	$("#queryForm").ajaxForm(function(result){
-			console.log(result);
-			var myImg = $('<img>').attr("src",result.LargeImage.URL);
-			var myLink = $('<a>').attr("href",result.DetailPageURL);
-			myLink.attr("target","_blank");
-			var myTitle = $('<h1>').text(result.ItemAttributes.Title);
-			if(typeof result.OfferSummary.LowestNewPrice !== 'undefined'){
-				var myPrice = $('<h2>').text("("+result.OfferSummary.LowestNewPrice.FormattedPrice+")");
-			} else {
-				myPrice = $('<h2>').text("no current offers");
+			function search(){
+				$.ajax({url:"/search", success: function(result){
+					var myImg = $('<img>').attr("src",result.LargeImage.URL);
+					var myLink = $('<a>').attr("href",result.DetailPageURL);
+					myLink.attr("target","_blank");
+					var myTitle = $('<h1>').text(result.ItemAttributes.Title);
+					if(typeof result.OfferSummary.LowestNewPrice !== 'undefined'){
+						var myPrice = $('<h2>').text("("+result.OfferSummary.LowestNewPrice.FormattedPrice+")");
+					} else {
+						myPrice = $('<h2>').text("no current offers");
+					}
+					myLink.append(myImg);
+					//myButton = $('<button>').attr('id', "nextBtn");
+					//myButton.attr()
+					$("#target").empty();
+					$("#target").append(myLink);
+					$("#target").append(myTitle);
+					$("#target").append(myPrice);
+					//$("#target").append(myButton);
+				}})
 			}
-			myLink.append(myImg);
-			//myButton = $('<button>').attr('id', "nextBtn");
-			//myButton.attr()
-			$("#target").empty();
-			$("#target").append(myLink);
-			$("#target").append(myTitle);
-			$("#target").append(myPrice);
-			//$("#target").append(myButton);
-		})
-</script>
-
-</body>
-
+		</script>
+	</body>
 
 </html>

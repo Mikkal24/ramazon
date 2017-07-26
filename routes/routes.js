@@ -7,6 +7,9 @@ var router = new express.Router();
 router.use("/search", searchRoutes);
 router.get("/random", function(req,res){
 	res.sendFile(path.join(__dirname,"../public/display.html"));
+});
+router.get("/test", function(req,res){
+	res.sendFile(path.join(__dirname,"../public/test.html"));
 })
 
 router.get("*", function(req,res){
