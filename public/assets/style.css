@@ -24,19 +24,20 @@ p {
 }
 .size{
 	color: rgb(255, 153, 0);
-	width:75%;
+	width:100%;
 	background: rgba(179, 179, 204, 0.2);
 	border-radius: 15px;
 }
 .interests{
 	color: rgb(255, 153, 0);
-	width:75%;
+	width:100%;
 	background: rgba(179, 179, 204, 0.2);
 	border-radius: 15px;
+    
 }
 .where {
 	color: rgb(255, 153, 0);
-	width:75%;
+	width:100%;
 	background: rgba(179, 179, 204, 0.2);
 	border-radius: 15px;
 }
@@ -49,8 +50,7 @@ p {
     float: right;
     position: relative;
     margin: 0px;
-    !important;
-}
+    
 }
 #indexTable {
 	columns: 3;
