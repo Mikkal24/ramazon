@@ -2,7 +2,7 @@
 |------------------------|:--------:|-----------------------:|
 
 
-The goal of Ramazon is to satisfy whatever it is in our brain that causes us to go to the Mall for no reason. And to tap the huge gambling addicted "crate" market but irl.
+The goal of Ramazon is to satisfy whatever it is in our brain that causes us to go to the Mall for no reason. And to tap the gambling addicted "crate" market but irl.
 
 "Idk what I want but I want to buy something"
 
