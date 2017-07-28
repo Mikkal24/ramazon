@@ -58,10 +58,14 @@ var amazonSearch = function(cb){
 	}).then((response) => {
 		var pickOne = Math.floor(Math.random()*response.result.ItemSearchResponse.Items.Item.length);
 		var item = response.result.ItemSearchResponse.Items.Item[pickOne];
+		var itemPrice
 		//console.log(item);
-		var itemPrice = item.OfferSummary.LowestNewPrice.Amount;
-		this.itemArray.push(item);
-		this.maximumPrice = this.maximumPrice - itemPrice;
+		
+		if(typeof item.OfferSummary.LowestNewPrice !== 'undefined'){
+			itemPrice = item.OfferSummary.LowestNewPrice.Amount;
+			this.itemArray.push(item);
+			this.maximumPrice = this.maximumPrice - itemPrice;
+		}
 		console.log("How much money do we got left? A: "+this.maximumPrice);
 		if(this.maximumPrice>100){
 			var newSearch = amazonSearch.bind(this);
