@@ -46,6 +46,41 @@ var indexArray = [
 	'Wine',
 	'Wireless']
 
+var amazonSearch = function(cb){
+	opHelper.execute('ItemSearch', {
+		'SearchIndex': this.searchIndex,
+		'Keywords': ' ',
+		'ItemPage': this.randomPage,
+		'Availability': 'Available',
+		'MaximumPrice': this.maximumPrice,
+		'MinimumPrice': this.minimumPrice,
+		'ResponseGroup': 'ItemAttributes,Offers,Images'
+	}).then((response) => {
+		var pickOne = Math.floor(Math.random()*response.result.ItemSearchResponse.Items.Item.length);
+		var item = response.result.ItemSearchResponse.Items.Item[pickOne];
+		var itemPrice
+		//console.log(item);
+		
+		if(typeof item.OfferSummary.LowestNewPrice !== 'undefined'){
+			itemPrice = item.OfferSummary.LowestNewPrice.Amount;
+			this.itemArray.push(item);
+			this.maximumPrice = this.maximumPrice - itemPrice;
+		}
+		console.log("How much money do we got left? A: "+this.maximumPrice);
+		if(this.maximumPrice>100){
+			var newSearch = amazonSearch.bind(this);
+			newSearch(cb);
+		} else {
+			console.log(this.itemArray);
+			cb(this.itemArray);
+		}
+		// console.log(item);
+	}).catch((err) => {
+		console.log("Something went wrong! ",err);
+	})
+}
+
+
 router.get("/", function(req,res){
 	var randomPage = Math.floor((Math.random()*9)+1);
 	var searchIndex = indexArray[Math.floor(Math.random()*indexArray.length)];
@@ -94,35 +129,51 @@ router.post("/", function(req,res){
 		searchIndex = req.body.SearchIndex;
 	}
 	
-	opHelper.execute('ItemSearch', {
-	  'SearchIndex': searchIndex,
-	  'Keywords': ' ',
-	  'ItemPage': randomPage,
-	  'Availability': 'Available',
-	  'MaximumPrice': req.body.range*100,
-	  'MinimumPrice': (req.body.range*100)-100,
-	  'ResponseGroup': 'ItemAttributes,Offers,Images'
-	}).then((response) => {
-		//Here we're console logging the arguments we entered just to make sure everything is interpreted correctly
-		var argArray = response.result.ItemSearchResponse.OperationRequest.Arguments.Argument;
-		for (var i = 0; i<argArray.length; i++){
-			console.log(i+": "+"Name: "+argArray[i].$.Name+" | Value: "+argArray[i].$.Value);
-		}
-		console.log("-------------------------------------");
-		console.log(response.result);
-	    console.log("-------------------------------------");
-	    //Then we have to pick one of the ten results to display
-	    var pickOne = Math.floor(Math.random()*response.result.ItemSearchResponse.Items.Item.length);
-	    
-	    var item = response.result.ItemSearchResponse.Items.Item[pickOne];
-	    
-	    res.json(item);
-	}).catch((err) => {
-		//if there are any errors
-		res.send(err);
-	    console.error("Something went wrong! ", err);
+	var queryObj = {
+		itemArray: [],
+		searchIndex: searchIndex,
+		randomPage: randomPage,
+		maximumPrice: req.body.range*100,
+		minimumPrice: 100
+	}
+
+	var mySearch = amazonSearch.bind(queryObj);
+
+	mySearch(function(itemArray){
+		res.json(itemArray);
 	});
+	// opHelper.execute('ItemSearch', {
+	//   'SearchIndex': searchIndex,
+	//   'Keywords': ' ',
+	//   'ItemPage': randomPage,
+	//   'Availability': 'Available',
+	//   'MaximumPrice': req.body.range*100,
+	//   'MinimumPrice': (req.body.range*100)-100,
+	//   'ResponseGroup': 'ItemAttributes,Offers,Images'
+	// }).then((response) => {
+	// 	//Here we're console logging the arguments we entered just to make sure everything is interpreted correctly
+	// 	var argArray = response.result.ItemSearchResponse.OperationRequest.Arguments.Argument;
+	// 	for (var i = 0; i<argArray.length; i++){
+	// 		console.log(i+": "+"Name: "+argArray[i].$.Name+" | Value: "+argArray[i].$.Value);
+	// 	}
+	// 	console.log("-------------------------------------");
+	// 	console.log(response.result);
+	//     console.log("-------------------------------------");
+	//     //Then we have to pick one of the ten results to display
+	//     var pickOne = Math.floor(Math.random()*response.result.ItemSearchResponse.Items.Item.length);
+	    
+	//     var item = response.result.ItemSearchResponse.Items.Item[pickOne];
+	    
+	//     res.json(item);
+	// }).catch((err) => {
+	// 	//if there are any errors
+	// 	res.send(err);
+	//     console.error("Something went wrong! ", err);
+	// });
 
 })
 
+
 module.exports = router;
+
+
