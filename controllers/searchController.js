@@ -47,8 +47,15 @@ var indexArray = [
 	'Wireless']
 
 var amazonSearch = function(cb){
+	var searchIndex;
+	if (typeof this.searchOptions !== 'string'){
+		searchIndex = this.searchOptions[Math.floor(Math.random()*this.searchOptions.length)];
+	} else {
+		searchIndex = this.searchOptions;
+	}
+
 	opHelper.execute('ItemSearch', {
-		'SearchIndex': this.searchIndex,
+		'SearchIndex': searchIndex,
 		'Keywords': ' ',
 		'ItemPage': this.randomPage,
 		'Availability': 'Available',
@@ -74,7 +81,6 @@ var amazonSearch = function(cb){
 			console.log(this.itemArray);
 			cb(this.itemArray);
 		}
-		// console.log(item);
 	}).catch((err) => {
 		console.log("Something went wrong! ",err);
 	})
@@ -82,95 +88,44 @@ var amazonSearch = function(cb){
 
 
 router.get("/", function(req,res){
+	/************************************************
+	*            GET ONE RANDOM ITEM                *
+	************************************************/
 	var randomPage = Math.floor((Math.random()*9)+1);
-	var searchIndex = indexArray[Math.floor(Math.random()*indexArray.length)];
-	opHelper.execute('ItemSearch', {
-	  'SearchIndex': searchIndex,
-	  'Keywords': ' ',
-	  'ItemPage': randomPage,
-	  //'MinPercentageOff': 90,
-	  'Availability': 'Available',
-	  //'MaximumPrice': 500,
-	  'MinimumPrice': 99,
-	  'ResponseGroup': 'ItemAttributes,Offers,Images'
-	}).then((response) => {
-		//Here we're console logging the arguments we entered just to make sure everything is interpreted correctly
-		var argArray = response.result.ItemSearchResponse.OperationRequest.Arguments.Argument;
-		for (var i = 0; i<argArray.length; i++){
-			console.log(i+": "+"Name: "+argArray[i].$.Name+" | Value: "+argArray[i].$.Value);
-		}
-		console.log("-------------------------------------");
-		console.log(response.result);
-	    console.log("-------------------------------------");
-	    //Then we have to pick one of the ten results to display
-	    var pickOne = Math.floor(Math.random()*response.result.ItemSearchResponse.Items.Item.length);
-	    //send result to the console1
-	    //console.log(response.result.ItemSearchResponse.Items.Item[pickOne]);
-	    //send result back to the client to be interpreted
-	     //console.log("-------------------------------------");
-	    var item = response.result.ItemSearchResponse.Items.Item[pickOne];
-	    //console.log(item.Offers.Offer)
-	    res.json(item);
-	}).catch((err) => {
-		//if there are any errors
-		res.send(err);
-	    console.error("Something went wrong! ", err);
+
+	var queryObj = {
+		itemArray: [],
+		searchOptions: indexArray,
+		randomPage: randomPage,
+		maximumPrice: null,
+		minimumPrice: 100
+	};
+
+	var mySearch = amazonSearch.bind(queryObj);
+	mySearch(function(itemArray){
+		res.json(itemArray);
 	});
 })
 
 router.post("/", function(req,res){
-	console.log(req.body);
+	/************************************************
+	*        GET MULTIPLE RANDOM ITEMS              *
+	************************************************/
 	var randomPage = Math.floor((Math.random()*9)+1);
-	var searchIndex;
-	console.log("=>"+req.body.SearchIndex+"<=");
-	if (typeof req.body.SearchIndex !== 'string'){
-		searchIndex = req.body.SearchIndex[Math.floor(Math.random()*req.body.SearchIndex.length)];
-	} else {
-		searchIndex = req.body.SearchIndex;
-	}
-	
+	var searchOptions = req.body.SearchIndex
+
 	var queryObj = {
 		itemArray: [],
-		searchIndex: searchIndex,
+		searchOptions: searchOptions,
 		randomPage: randomPage,
 		maximumPrice: req.body.range*100,
 		minimumPrice: 100
 	}
 
 	var mySearch = amazonSearch.bind(queryObj);
-
 	mySearch(function(itemArray){
 		res.json(itemArray);
 	});
-	// opHelper.execute('ItemSearch', {
-	//   'SearchIndex': searchIndex,
-	//   'Keywords': ' ',
-	//   'ItemPage': randomPage,
-	//   'Availability': 'Available',
-	//   'MaximumPrice': req.body.range*100,
-	//   'MinimumPrice': (req.body.range*100)-100,
-	//   'ResponseGroup': 'ItemAttributes,Offers,Images'
-	// }).then((response) => {
-	// 	//Here we're console logging the arguments we entered just to make sure everything is interpreted correctly
-	// 	var argArray = response.result.ItemSearchResponse.OperationRequest.Arguments.Argument;
-	// 	for (var i = 0; i<argArray.length; i++){
-	// 		console.log(i+": "+"Name: "+argArray[i].$.Name+" | Value: "+argArray[i].$.Value);
-	// 	}
-	// 	console.log("-------------------------------------");
-	// 	console.log(response.result);
-	//     console.log("-------------------------------------");
-	//     //Then we have to pick one of the ten results to display
-	//     var pickOne = Math.floor(Math.random()*response.result.ItemSearchResponse.Items.Item.length);
-	    
-	//     var item = response.result.ItemSearchResponse.Items.Item[pickOne];
-	    
-	//     res.json(item);
-	// }).catch((err) => {
-	// 	//if there are any errors
-	// 	res.send(err);
-	//     console.error("Something went wrong! ", err);
-	// });
-
 })
 
 

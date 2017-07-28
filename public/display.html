@@ -24,12 +24,12 @@
 			});
 			function search(){
 				$.ajax({url:"/search", success: function(result){
-					var myImg = $('<img>').attr("src",result.LargeImage.URL);
-					var myLink = $('<a>').attr("href",result.DetailPageURL);
+					var myImg = $('<img>').attr("src",result[0].LargeImage.URL);
+					var myLink = $('<a>').attr("href",result[0].DetailPageURL);
 					myLink.attr("target","_blank");
-					var myTitle = $('<h1>').text(result.ItemAttributes.Title);
-					if(typeof result.OfferSummary.LowestNewPrice !== 'undefined'){
-						var myPrice = $('<h2>').text("("+result.OfferSummary.LowestNewPrice.FormattedPrice+")");
+					var myTitle = $('<h1>').text(result[0].ItemAttributes.Title);
+					if(typeof result[0].OfferSummary.LowestNewPrice !== 'undefined'){
+						var myPrice = $('<h2>').text("("+result[0].OfferSummary.LowestNewPrice.FormattedPrice+")");
 					} else {
 						myPrice = $('<h2>').text("no current offers");
 					}
