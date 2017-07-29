@@ -2,11 +2,6 @@
 
 body {
 	background-color: rgb(20, 110, 180); 
-	position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
     font-family: Verdana;
 }
 
@@ -15,7 +10,6 @@ h1 {
 }
 p {
 	color: black;
-	width:75%;
 }
 .howitworks {
 	color: rgb(255, 153, 0);
@@ -41,6 +35,12 @@ p {
 	background: rgba(179, 179, 204, 0.2);
 	border-radius: 15px;
 }
+
+.coloredContainer{
+	background: rgba(179, 179, 204, 0.2);
+	border-radius: 15px;
+	color: rgb(255, 153, 0);	
+}
 .randomMoon {
     border-radius: 100%;
     background: #73AD21;
@@ -54,4 +54,8 @@ p {
 }
 #indexTable {
 	columns: 3;
+}
+
+.clickable {
+	cursor: pointer;
 }
