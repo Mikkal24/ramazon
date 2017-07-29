@@ -1,3 +1,4 @@
+var sortOptions = require('./sortOptions');
 var express = require('express');
 var router = new express.Router();
 const {OperationHelper} = require('apac');
@@ -21,7 +22,6 @@ var indexArray = [
 	'Collectibles',
 	'Electronics',
 	'Fashion',
-	'GiftCards',
 	'Handmade',
 	'HealthPersonalCare',
 	'HomeGarden',
@@ -48,11 +48,17 @@ var indexArray = [
 
 var amazonSearch = function(cb){
 	var searchIndex;
+	var sortArr;
+	var sort;
+	
 	if (typeof this.searchOptions !== 'string'){
 		searchIndex = this.searchOptions[Math.floor(Math.random()*this.searchOptions.length)];
 	} else {
 		searchIndex = this.searchOptions;
 	}
+
+	sortArr = sortOptions.whichIndex(searchIndex)
+	sort = sortArr[Math.floor(Math.random()*sortArr.length)];
 
 	opHelper.execute('ItemSearch', {
 		'SearchIndex': searchIndex,
@@ -61,6 +67,7 @@ var amazonSearch = function(cb){
 		'Availability': 'Available',
 		'MaximumPrice': this.maximumPrice,
 		'MinimumPrice': this.minimumPrice,
+		'Sort': sort,
 		'ResponseGroup': 'ItemAttributes,Offers,Images'
 	}).then((response) => {
 		var pickOne = Math.floor(Math.random()*response.result.ItemSearchResponse.Items.Item.length);
