@@ -1,4 +1,5 @@
 var sortOptions = require('./sortOptions');
+var addToCart = require('./addToCart');
 var express = require('express');
 var router = new express.Router();
 const {OperationHelper} = require('apac');
@@ -72,13 +73,14 @@ var amazonSearch = function(cb){
 	}).then((response) => {
 		var pickOne = Math.floor(Math.random()*response.result.ItemSearchResponse.Items.Item.length);
 		var item = response.result.ItemSearchResponse.Items.Item[pickOne];
-		var itemPrice
+		var itemPrice;
 		//console.log(item);
 		
 		if(typeof item.OfferSummary.LowestNewPrice !== 'undefined'){
 			itemPrice = item.OfferSummary.LowestNewPrice.Amount;
 			this.itemArray.push(item);
 			this.maximumPrice = this.maximumPrice - itemPrice;
+			addToCart(item.ASIN);
 		}
 		console.log("How much money do we got left? A: "+this.maximumPrice);
 		if(this.maximumPrice>100){
