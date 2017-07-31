@@ -10,16 +10,39 @@ const opHelper = new OperationHelper({
     maxRequestsPerSecond: 1
 });
 
-var addToCart = function(ASIN){
+
+var addToCart = function(ASIN,cartId,HMAC){
 	opHelper.execute('CartAdd', {
 	'AssociateTag': 'atchotes-20',
-	'CartId':'136-3315516-4042836',
-	'HMAC': 'kPCJHM883byycivvgjul78Yi/E4=',
+	'CartId':cartId,
+	'HMAC': HMAC,
 	'Item.1.ASIN': ASIN,
 	'Item.1.Quantity': 1
 	}).then((response) => {
-		console.log(JSON.stringify(response,null,' '));
+		//console.log(JSON.stringify(response,null,' '));
 	});
 }
 
-module.exports = addToCart;
+var createCart = function(ASIN,itemArray,cb){
+	opHelper.execute('CartCreate', {
+	'AssociateTag': 'atchotes-20',
+	'Item.1.ASIN': ASIN,
+	'Item.1.Quantity': 1
+	}).then((response) => {
+		var cart = response.result.CartCreateResponse.Cart;
+		console.log(JSON.stringify(cart,null,' '));
+		for(var i = 1;i<itemArray.length;i++){
+			addToCart(itemArray[i].ASIN, cart.CartId, cart.HMAC)
+		}
+		console.log("trying to redirect");
+		console.log(cb);
+		cb(cart.PurchaseURL)
+	});
+}
+
+var cartMethods = {
+	addToCart: addToCart,
+	createCart: createCart
+}
+
+module.exports = cartMethods;

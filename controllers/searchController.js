@@ -1,5 +1,5 @@
 var sortOptions = require('./sortOptions');
-var addToCart = require('./addToCart');
+var Cart = require('./addToCart');
 var express = require('express');
 var router = new express.Router();
 const {OperationHelper} = require('apac');
@@ -71,28 +71,38 @@ var amazonSearch = function(cb){
 		'Sort': sort,
 		'ResponseGroup': 'ItemAttributes,Offers,Images'
 	}).then((response) => {
-		var pickOne = Math.floor(Math.random()*response.result.ItemSearchResponse.Items.Item.length);
-		var item = response.result.ItemSearchResponse.Items.Item[pickOne];
-		var itemPrice;
-		//console.log(item);
-		
-		if(typeof item.OfferSummary.LowestNewPrice !== 'undefined'){
-			itemPrice = item.OfferSummary.LowestNewPrice.Amount;
-			this.itemArray.push(item);
-			this.maximumPrice = this.maximumPrice - itemPrice;
-			addToCart(item.ASIN);
-		}
-		console.log("How much money do we got left? A: "+this.maximumPrice);
-		if(this.maximumPrice>100){
-			var newSearch = amazonSearch.bind(this);
-			newSearch(cb);
-		} else {
-			console.log(this.itemArray);
-			cb(this.itemArray);
-		}
+		var handler = handleSearchResults.bind(this);
+		handler(response,cb);
 	}).catch((err) => {
 		console.log("Something went wrong! ",err);
 	})
+}
+
+function handleSearchResults(response, cb){
+	var pickOne = Math.floor(Math.random()*response.result.ItemSearchResponse.Items.Item.length);
+	var item = response.result.ItemSearchResponse.Items.Item[pickOne];
+	var itemPrice;
+
+	if(typeof item.OfferSummary.LowestNewPrice !== 'undefined'){
+		itemPrice = item.OfferSummary.LowestNewPrice.Amount;
+		this.itemArray.push(item);
+		this.maximumPrice = this.maximumPrice - itemPrice;
+	}
+	console.log("How much money do we got left? A: "+this.maximumPrice);
+	if(this.maximumPrice>100){
+		var newSearch = amazonSearch.bind(this);
+		newSearch(cb);
+	} else {
+		//Okay we've found all our items let's add them to a cart
+		console.log(this.itemArray);
+		handleCart(this.itemArray,cb);
+		//cb(this.itemArray);
+	}
+}
+
+function handleCart(itemArray,cb){
+	Cart.createCart(itemArray[0].ASIN, itemArray, cb);
+	console.log(cb);
 }
 
 
@@ -132,10 +142,13 @@ router.post("/", function(req,res){
 	}
 
 	var mySearch = amazonSearch.bind(queryObj);
-	mySearch(function(itemArray){
-		res.json(itemArray);
+	mySearch(function(purchaseURL){
+		console.log(purchaseURL);
+		res.redirect(purchaseURL);
 	});
 })
+
+
 
 
 module.exports = router;
