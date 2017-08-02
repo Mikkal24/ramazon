@@ -1,6 +1,8 @@
 //gonna buy this B06XDH6SZP autonimously 
 //HMAC === kPCJHM883byycivvgjul78Yi/E4=
 
+var db = require("../models");
+
 const {OperationHelper} = require('apac');
 
 const opHelper = new OperationHelper({
@@ -37,6 +39,15 @@ var createCart = function(ASIN,itemArray,cb){
 		console.log("trying to redirect");
 		console.log(cb);
 		cb(cart.PurchaseURL)
+		db.Cart.create({
+			purchaseURL: cart.PurchaseURL,
+			customerName: "Michael Sorensen",
+			address: "8703 dummy dr.",
+			city: "New York",
+			state: "NY",
+			zipCode: "98456",
+			phoneNumber: "8888888888"
+		})
 	});
 }
 
