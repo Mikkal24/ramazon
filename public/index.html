@@ -1,176 +1,28 @@
-<!DOCTYPE html> 
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title> Ramazon </title>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-	<!-- JQuery -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<link  rel="stylesheet" type="text/css" href="assets/style.css">
-	<!-- jQuery Form -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.1/jquery.form.min.js" integrity="sha384-tIwI8+qJdZBtYYCKwRkjxBGQVZS3gGozr3CtI+5JF/oL1JmPEHzCEnIKbDbLTCer" crossorigin="anonymous"></script>
+	<title>Suggestion Box</title>
 
-	
+	<!-- Materialize CDNs -->
+	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
 
-	
+	<!-- colors -->
+	<link rel="stylesheet" href="./assets/colors.css">
+
+	<!-- fixedFooter -->
+	<link rel="stylesheet" href="./assets/other.css">
+
+	<!-- form styles -->
+	<link rel="stylesheet" href="./assets/formStyle.css">
 </head>
-
-
-<!-- <script>
-document.getElementById(" ").innerHTML = var
-
-</script> -->
-
 <body>
+	<div id="app"></div>
 
-<div class="randomMoon">
-<img src="https://jqueryui.com/">
-</div><br>
-<h1> RAMAZON </h1>
-<div class="howitworks">
-</div>
-
-<form id="queryForm" action="/search" method="post">
-	<div class="interests">
-		<h3> STEP 1: Pick Your Interests</h3>
-		
-	
-		<select style="width:100%" name="SearchIndex" multiple></select>
-		<!-- We'll just use one submit button for now  -->
-		<!-- <input type="submit" value="Pick"> -->
-	</div>
-
-
-
-	<div class="size">
-		<h3> STEP 2: Pick How Much Stuff</h3>
-		
- 		<input type="radio" name="range" value="20" > Some Stuff $20<br>
-		<input type="radio" name="range" value="50" > More Stuff $50<br>
-		<input type="radio" name="range" value="100" > All the Stuff $100<br>
-
-		<!-- commenting this out for now to get a functioning form -->
-		<!-- <input type="radio" name="range" value="Custom Stuff" > Monthly Stuff<br>	
-		Custom Stuff<input type="text" name="Custom"> <br>	 -->
-	
-		<input type="submit" value="Submit">
-	</div>
-</form> 
-
-<div class="where">
-	<h3> STEP 3: Tell us where to send your Stuff<h3>
-	
-	<form>
- 		<table>
-			<tr>
-            	<td>First Name:</td> <td>Last Name:</td>
-            </tr>
-    
-			<tr>
-            	<td><input type="text" name="First Name"></td>
-                <td><input type="text" name="Last Name"></td>
-            </tr>
-    
-			<tr>
-            	<td>Address Line 1:</td><td>Address Line 2(optional):</td>
-            </tr>
-    
-			<tr>
-            	<td><input type="text" name="Address Line 1" required></td>
-				<td><input type="text" name="Address Line 2"> </td>
-            </tr>
-    
-			<tr>
-            	<td>City:</td><td>State:</td>
-            </tr>
-			<tr>
-            	<td><input type="text" name="City" required></td>
-                <td><input type="text" name="State" required></td>
-            </tr>
-            <tr>
-            	<td>Zip:</td>
-            </tr>
-            <tr>
-            	<td><input type="text" name="Zip" required></td>
-            </tr>
-		
-		</table>
-		<input type="submit" value="Submit">
-	</form> 
-
-
-<div class="container">
-	<div class="center-align" id="target"></div>
-</div>
-
-<script>
-var indexArray = [
-	'Appliances',
-	'ArtsAndCrafts',
-	'Automotive',
-	'Baby',
-	'Beauty',
-	'Books',
-	'Collectibles',
-	'Electronics',
-	'Fashion',
-	'Handmade',
-	'HealthPersonalCare',
-	'HomeGarden',
-	'Industrial',
-	'LawnAndGarden',
-	'Luggage',
-	'Magazines',
-	'MobileApps',
-	'Movies',
-	'Music',
-	'MusicalInstruments',
-	'OfficeProducts',
-	'Pantry',
-	'PCHardware',
-	'PetSupplies',
-	'Software',
-	'SportingGoods',
-	'Tools',
-	'Toys',
-	'UnboxVideo',
-	'VideoGames',
-	'Wine',
-	'Wireless']
-	$(document).ready(function(){
-		for(var i=0;i<indexArray.length;i++){
-			var newListItem = $("<option>").attr({
-				"value": indexArray[i]
-			});
-			newListItem.text(indexArray[i])
-			$("#indexTable").append(newListItem);
-		}
-	})
-	$("#queryForm").ajaxForm(function(result){
-			console.log(result);
-			var myImg = $('<img>').attr("src",result.LargeImage.URL);
-			var myLink = $('<a>').attr("href",result.DetailPageURL);
-			myLink.attr("target","_blank");
-			var myTitle = $('<h1>').text(result.ItemAttributes.Title);
-			if(typeof result.OfferSummary.LowestNewPrice !== 'undefined'){
-				var myPrice = $('<h2>').text("("+result.OfferSummary.LowestNewPrice.FormattedPrice+")");
-			} else {
-				myPrice = $('<h2>').text("no current offers");
-			}
-			myLink.append(myImg);
-			//myButton = $('<button>').attr('id', "nextBtn");
-			//myButton.attr()
-			$("#target").empty();
-			$("#target").append(myLink);
-			$("#target").append(myTitle);
-			$("#target").append(myPrice);
-			//$("#target").append(myButton);
-		})
-</script>
-
+	<!-- bundle & jQuery & materialize JS -->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+	<script src="bundle.js"></script>
 </body>
-
-
 </html>

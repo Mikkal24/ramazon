@@ -30,7 +30,6 @@ var indexArray = [
 	'LawnAndGarden',
 	'Luggage',
 	'Magazines',
-	'MobileApps',
 	'Movies',
 	'Music',
 	'MusicalInstruments',
@@ -71,8 +70,15 @@ var amazonSearch = function(cb){
 		'Sort': sort,
 		'ResponseGroup': 'ItemAttributes,Offers,Images'
 	}).then((response) => {
-		var handler = handleSearchResults.bind(this);
-		handler(response,cb);
+		if(this.maximumPrice !== null){
+			var handler = handleSearchResults.bind(this);
+			handler(response,cb);
+		} else {
+			var pickOne = Math.floor(Math.random()*response.result.ItemSearchResponse.Items.Item.length);
+			var item = [response.result.ItemSearchResponse.Items.Item[pickOne]];
+
+			cb(item);
+		}
 	}).catch((err) => {
 		console.log("Something went wrong! ",err);
 	})
