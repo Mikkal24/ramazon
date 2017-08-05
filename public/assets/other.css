@@ -24,6 +24,7 @@
   .amazonYellowBorder {
     border: solid 3px;
     border-color: #fb9701;
+    min-width: 66%;
   }
 
   img {
@@ -46,6 +47,14 @@
   .displayContainer img{
     max-height: 100%;
     max-width: 100%;
+  }
+
+  .decentMargin {
+    margin: 20px;
+  }
+
+  .decentPadding {
+    padding: 20px;
   }
 
   /*BUTTONS*/

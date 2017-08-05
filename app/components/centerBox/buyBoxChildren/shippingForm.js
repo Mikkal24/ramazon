@@ -1,32 +1,67 @@
 var React = require("react");
 var shippingForm = React.createClass({
+
+	getFormInfo: function(event){
+		event.preventDefault();
+		var formArray = $("#shippingForm").serializeArray();
+		var formObject = {};
+
+		for (var i = 0; i < formArray.length; i++){
+			formObject[formArray[i]['name']] = formArray[i]['value'];
+		}
+		console.log(formObject);
+		this.props.setShippingInfo(formObject);
+		this.props.nextHandler();
+	},
+
 	render: function(){
 		return(
 			<div className="centerThis amazonYellowBorder">
-				<form>
-					<ul className="form-style-1">
-					    <li><label>Full Name <span className="required">*</span></label><input type="text" name="field1" className="field-divided" placeholder="First" />&nbsp;<input type="text" name="field2" className="field-divided" placeholder="Last" /></li>
-					    <li>
-					        <label>Email <span className="required">*</span></label>
-					        <input type="email" name="field3" className="field-long" />
-					    </li>
-					    <li>
-					        <label>Subject</label>
-					        <select name="field4" className="field-select">
-					        <option value="Advertise">Advertise</option>
-					        <option value="Partnership">Partnership</option>
-					        <option value="General Question">General</option>
-					        </select>
-					    </li>
-					    <li>
-					        <label>Your Message <span className="required">*</span></label>
-					        <textarea name="field5" id="field5" className="field-long field-textarea"></textarea>
-					    </li>
-					    <li>
-					        <input type="submit" value="Submit" />
-					    </li>
-					</ul>
-					</form>
+				<form id="shippingForm" onSubmit={this.getFormInfo}>
+			 		<table>
+						<tr>
+							<td>Customer Name:</td>
+							<td>Phone Number: </td>
+						</tr>
+			    		<tr>
+			    			<td>
+			    				<input type="text" name="customerName"></input>
+			    			</td>
+			    			<td>
+			    				<input type="text" name="phoneNumber"></input>
+			    			</td>
+			    		</tr>
+						<tr>
+							<td>Address Line 1:</td>
+							<td>Address Line 2(optional):</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" name="address1" required></input>
+							</td>
+							<td>
+								<input type="text" name="address2"></input>
+							</td>
+						</tr>
+						<tr>
+							<td>City:</td>
+							<td>State:</td>
+							<td>Zip:</td>
+						</tr>
+						<tr>
+							<td>
+								<input type="text" name="city" required></input>
+							</td>
+							<td>
+								<input type="text" name="state" required></input>
+							</td>
+							<td>
+								<input type="text" name="zip" required></input>
+							</td>
+						</tr>
+					</table>
+					<a onClick={this.getFormInfo} className="btn orange right">Next &gt;</a>
+				</form> 
 			</div>
 			)
 	}

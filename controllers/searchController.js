@@ -155,7 +155,7 @@ router.post("/", function(req,res){
 	var mySearch = amazonSearch.bind(queryObj);
 	mySearch(function(purchaseURL){
 		console.log(purchaseURL);
-		res.redirect(purchaseURL);
+		res.send(purchaseURL);
 	});
 })
 

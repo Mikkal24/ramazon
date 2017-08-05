@@ -2,40 +2,74 @@ var React = require("react");
 var SelectCategories = require("./buyBoxChildren/SelectCategories");
 var ShippingForm = require("./buyBoxChildren/ShippingForm");
 var BillingForm = require("./buyBoxChildren/BillingForm");
+var SelectAmount = require("./buyBoxChildren/SelectAmount");
 
-var WhichComponent = React.createClass({
-	render: function(){
-		var step=this.props.step;
-		switch(step){
-			case 1:
-				return <SelectCategories />
-			case 2:
-				return <ShippingForm />
-			case 3:
-				return <BillingForm />
-		}
-	}
-});
+
 
 var BuyBox = React.createClass({
 	getInitialState: function(){
 		return({
-			step: 1
+			step: 1,
+			categories: [],
+			amount: 0,
+			shippingInfo: {
+				customerName: "",
+				phoneNumber: "",
+				address1: "",
+				address2: "",
+				city: "",
+				state: "",
+				zip: ""
+			}
 		})
+	},
+
+	componentDidUpdate: function(){
+		console.log(this.state);
 	},
 
 	nextHandler: function(){
 		this.setState({step:this.state.step+1});
 	},
 
-	render: function(){
-		return(
-			<div>
-			<WhichComponent step={this.state.step}/>
+	setShippingInfo(data){
+		this.setState({shippingInfo: data});
+	},
+	setAmount(data){
+		this.setState({amount: data});
+	},
 
-			<a onClick={this.nextHandler} className="btn Orange">Next</a>
-			</div>
-		)
+	setCategories(data){
+		this.setState({categories: data});
+	},
+
+	render: function(){
+
+		switch(this.state.step){
+			case 1:
+				return(
+						<SelectAmount setAmount={this.setAmount} nextHandler={this.nextHandler} />
+					)
+			case 2:
+				return( 
+					<div>
+						<SelectCategories setCategories={this.setCategories} nextHandler={this.nextHandler} />
+					</div>
+					)
+			case 3:
+				return(
+					<div>
+						<ShippingForm setShippingInfo={this.setShippingInfo} nextHandler={this.nextHandler}/>
+						
+					</div>
+					)
+			case 4:
+				return(
+				<div>
+					<BillingForm queryInfo={this.state} />
+				</div>
+				 )
+		}
 	}
 });
 
