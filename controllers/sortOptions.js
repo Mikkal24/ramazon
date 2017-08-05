@@ -280,18 +280,20 @@ var UnboxVideoSort = [
 ]
 
 var VideoGamesSort = [
-	"relevancerank",
-	"featured",
-	"reviewrank",
-	"-release-date"
-]
-
-var WineSort = [
 	"pmrank",
 	"salesrank",
 	"price",
 	"-price",
 	"titlerank"
+]
+
+var WineSort = [
+	"relevancerank",
+	"featured",
+	"price",
+	"-price",
+	"reviewrank",
+	"reviewscore"
 ]
 
 var WirelessSort = [

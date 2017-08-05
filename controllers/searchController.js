@@ -81,6 +81,11 @@ var amazonSearch = function(cb){
 		}
 	}).catch((err) => {
 		console.log("Something went wrong! ",err);
+		console.log("searchIndex: "+ searchIndex);
+		console.log("ItemPage: "+ this.randomPage);
+		console.log("maxPrice: "+this.maximumPrice);
+		console.log("minimumPrice: "+this.minimumPrice);
+		console.log("sort: "+sort);
 	})
 }
 
