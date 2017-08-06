@@ -14,11 +14,17 @@ var BillingForm = React.createClass({
 	},
 	render: function(){
 		return(
-			<div >
-				<h1>Stripe Billing Form Coming soon</h1>
-				<br></br>
-				<p id="target" className="center-align"></p>
-			</div>
+			<form action="/your-server-side-code" method="POST">
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_5d9CqeRNmhQBq86Qj1slB5sj"
+    data-amount="999"
+    data-name="ramazongen.herokuapp"
+    data-description="Widget"
+    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+    data-locale="auto">
+  </script>
+</form>
 			)
 	}
 });
