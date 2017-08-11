@@ -4,9 +4,9 @@ var BuyOrBrowse = React.createClass({
 		return(
 			<div className="row">
 				<div className="buyOrBrowseBox button-row">
-					<div><a href="/buy" rel="nofollow" rel="noreferrer"title="Buy"></a></div>
+					<div><a href="/buy" rel="nofollow" rel="noreferrer" content="Buy"></a></div>
 					<br></br>
-    				<div><a href="/browse" rel="nofollow" rel="noreferrer"title="Browse"></a></div>
+    				<div><a href="/browse" rel="nofollow" rel="noreferrer" content="Browse"></a></div>
 				</div>
 			</div>
 			)

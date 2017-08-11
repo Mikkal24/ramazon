@@ -62,8 +62,7 @@ var BrowseBox = React.createClass({
 		var response = this.state.pastSearches[currentCount-1];
 		var image = response.data[0].LargeImage ? response.data[0].LargeImage.URL : "./assets/defaultImage.png";
 		var url = response.data[0].DetailPageURL;
-		var lowestOffer = response.data[0].OfferSummary.LowestNewPrice ? 
-			"("+response.data[0].OfferSummary.LowestNewPrice.FormattedPrice+")" : "(no new offers)";
+		var lowestOffer = response.data[0].OfferSummary.LowestNewPrice ? "("+response.data[0].OfferSummary.LowestNewPrice.FormattedPrice+")" : "(no new offers)";
 		var title = response.data[0].ItemAttributes.Title;
 		var leftArrowStatus = currentCount>1 ? true : false;
 

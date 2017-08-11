@@ -342,7 +342,7 @@ var sortOptions = {
 			case 'Magazines':
 				return MagazinesSort;
 			case 'MobileApps':
-				return MobileApps;
+				return MobileAppsSort;
 			case 'Movies':
 				return MoviesSort;
 			case 'Music':

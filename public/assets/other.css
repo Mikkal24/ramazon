@@ -106,7 +106,7 @@
      position: absolute;
      border: 5px solid black;
      box-sizing: border-box;
-     content: attr(title);
+     content: attr(content);
      display: -webkit-box;
      display: -moz-box;
      display: box;

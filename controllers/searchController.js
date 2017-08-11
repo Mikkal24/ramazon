@@ -23,7 +23,7 @@ var indexArray = [
 	'Collectibles',
 	'Electronics',
 	'Fashion',
-	'Handmade',
+	//'Handmade',
 	'HealthPersonalCare',
 	'HomeGarden',
 	'Industrial',
@@ -41,7 +41,7 @@ var indexArray = [
 	'SportingGoods',
 	'Tools',
 	'Toys',
-	'UnboxVideo',
+	//'UnboxVideo',
 	'VideoGames',
 	'Wine',
 	'Wireless']
@@ -68,15 +68,19 @@ var amazonSearch = function(cb){
 		'MaximumPrice': this.maximumPrice,
 		'MinimumPrice': this.minimumPrice,
 		'Sort': sort,
+		'MerchantId': this.merchantId,
 		'ResponseGroup': 'ItemAttributes,Offers,Images'
 	}).then((response) => {
+		//console.log(JSON.stringify(response,'false'," "));
 		if(this.maximumPrice !== null){
 			var handler = handleSearchResults.bind(this);
 			handler(response,cb);
 		} else {
 			var pickOne = Math.floor(Math.random()*response.result.ItemSearchResponse.Items.Item.length);
 			var item = [response.result.ItemSearchResponse.Items.Item[pickOne]];
-
+			//console.log(JSON.stringify(item[0].Offers,'false'," "));
+			//console.log(item[0].Offers.Offer.OfferListing.IsEligibleForPrime);
+			//console.log(item[0].Offers.Offer.OfferListing.AvailabilityAttributes.AvailabilityType)
 			cb(item);
 		}
 	}).catch((err) => {
@@ -94,8 +98,8 @@ function handleSearchResults(response, cb){
 	var item = response.result.ItemSearchResponse.Items.Item[pickOne];
 	var itemPrice;
 
-	if(typeof item.OfferSummary.LowestNewPrice !== 'undefined'){
-		itemPrice = item.OfferSummary.LowestNewPrice.Amount;
+	if(typeof item.OfferSummary.LowestNewPrice !== 'undefined' && item.Offers.Offer.OfferListing.IsEligibleForPrime && (item.Offers.Offer.OfferListing.AvailabilityAttributes.AvailabilityType === 'now')){
+		itemPrice = item.Offers.Offer.OfferListing.Price.Amount;
 		this.itemArray.push(item);
 		this.maximumPrice = this.maximumPrice - itemPrice;
 	}
@@ -128,7 +132,8 @@ router.get("/", function(req,res){
 		searchOptions: indexArray,
 		randomPage: randomPage,
 		maximumPrice: null,
-		minimumPrice: 100
+		minimumPrice: null,
+		merchantId: 'All'
 	};
 
 	var mySearch = amazonSearch.bind(queryObj);
@@ -149,7 +154,8 @@ router.post("/", function(req,res){
 		searchOptions: searchOptions,
 		randomPage: randomPage,
 		maximumPrice: req.body.range*100,
-		minimumPrice: 100
+		minimumPrice: 100,
+		merchantId: 'Amazon'
 	}
 
 	var mySearch = amazonSearch.bind(queryObj);
