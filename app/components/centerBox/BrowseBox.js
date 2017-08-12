@@ -82,7 +82,7 @@ var BrowseBox = React.createClass({
 		console.log(this.state.pastSearches[this.state.currentCount+1]);
 		var currentCount = this.state.currentCount+1;
 		var response = this.state.pastSearches[currentCount-1];
-		var image = response.data[0].LargeImage ? response.data[0].LargeImage.URL : "./assets/defaultImage.png";
+		var image = response.data[0].LargeImage ? response.data[0].ImageSets.ImageSet[0].LargeImage.URL : "./assets/defaultImage.png";
 		var url = response.data[0].DetailPageURL;
 		var lowestOffer = response.data[0].OfferSummary.LowestNewPrice ? 
 			"("+response.data[0].OfferSummary.LowestNewPrice.FormattedPrice+")" : "(no new offers)";
@@ -110,7 +110,7 @@ var BrowseBox = React.createClass({
 				</div>
 				: null}
 				<div className="displayContainer">
-					<a href={this.state.url} target="_blank"><img src={this.state.image}></img></a>
+					<a href={this.state.url} target="_blank"><img className="browseImg" src={this.state.image}></img></a>
 					<h5>{this.state.title}</h5>
 					<h5>{this.state.price}</h5>
 				</div>

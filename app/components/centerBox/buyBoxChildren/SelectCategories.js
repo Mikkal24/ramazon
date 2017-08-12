@@ -68,8 +68,8 @@ var SelectCategories = React.createClass({
 		for(var i = 0;i<this.state.indexArray.length;i++){
 			$("#target").append($("<a>")
 						.attr({
-							"class": "btn interest",
-							"id":this.state.indexArray[i].name					
+							"class": "btn interest col s2",
+							"id":this.state.indexArray[i].name				
 							})
 						.text(this.state.indexArray[i].name));
 		}
@@ -108,7 +108,7 @@ var SelectCategories = React.createClass({
 					<div className="row">
 					<a id="all" className="col s4 offset-s4 align btn red">All</a>
 					</div>
-					<div id="target"></div>
+					<div id="target" className="row"></div>
 					<br></br>
 					<div>
 						<p className="center-align"><a onClick={this.getInfo} className="btn orange">Next &gt;</a></p>
