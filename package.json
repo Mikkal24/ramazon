@@ -32,6 +32,7 @@
     "react-router": "^3.0.0",
     "sequelize": "^4.4.2",
     "sequelize-cli": "^2.7.0",
+    "simple-headless-chrome": "^4.3.1",
     "stripe": "^4.24.0",
     "webpack": "^1.13.1"
   },
