@@ -14,8 +14,8 @@ async function buyCart(purchaseUrl, shippingInfo) {
     await mainTab.wait(2000);
     await mainTab.click('input[name=proceedToCheckout]');
     await mainTab.wait(2000);
-    await mainTab.setValue('#ap_email','dsorensen33@icloud.com')
-    await mainTab.setValue('#ap_password', '8Wonders!')
+    await mainTab.setValue('#ap_email','')
+    await mainTab.setValue('#ap_password', '')
     await mainTab.click('#signInSubmit')
     await mainTab.wait(1000)
     //await browser.close()
