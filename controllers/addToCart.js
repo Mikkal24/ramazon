@@ -26,7 +26,7 @@ var addToCart = function(ASIN,cartId,HMAC){
 	});
 }
 
-var createCart = function(ASIN,itemArray,cb){
+var createCart = function(ASIN,itemArray,shippingObj,cb){
 	opHelper.execute('CartCreate', {
 	'AssociateTag': 'atchotes-20',
 	'Item.1.ASIN': ASIN,
@@ -37,18 +37,21 @@ var createCart = function(ASIN,itemArray,cb){
 		for(var i = 1;i<itemArray.length;i++){
 			addToCart(itemArray[i].ASIN, cart.CartId, cart.HMAC)
 		}
-		console.log("trying to redirect");
-		console.log(cb);
+		//console.log("trying to redirect");
+		//console.log(cb);
+		console.log(JSON.stringify(shippingObj,null," "));
+		console.log(cart.PurchaseURL);
+		console.log(typeof cart.PurchaseURL);
 		cb(cart.PurchaseURL)
-		db.Cart.create({
-			purchaseURL: cart.PurchaseURL,
-			customerName: "Michael Sorensen",
-			address: "8703 dummy dr.",
-			city: "New York",
-			state: "NY",
-			zipCode: "98456",
-			phoneNumber: "8888888888"
-		})
+		// db.Cart.create({
+		// 	purchaseURL: cart.PurchaseURL,
+		// 	customerName: "Michael Sorensen",
+		// 	address: "8703 dummy dr.",
+		// 	city: "New York",
+		// 	state: "NY",
+		// 	zipCode: "98456",
+		// 	phoneNumber: "8888888888"
+		// })
 		buyCart(cart.PurchaseURL,'test');
 	});
 }

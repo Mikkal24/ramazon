@@ -14,11 +14,15 @@ var BillingForm = React.createClass({
 
 		let queryObj = {
 			SearchIndex: this.props.queryInfo.categories,
-			range: this.props.queryInfo.amount
+			range: this.props.queryInfo.amount,
+			shippingAddress: this.props.queryInfo.shippingInfo
 		}
 
 		query.getRandomCart(queryObj).then(function(response){
-			var cartLink = $("<a>").addClass("btn orange").attr({"href": response.data,"target":"_blank"}).text("But you can see what you would have got!");
+			var cartLink = $("<a>")
+				.addClass("btn orange")
+				.attr({"href": response.data,"target":"_blank"})
+				.text("But you can see what you would have got!");
 			$("#target").append(cartLink);
 		})
 	},
