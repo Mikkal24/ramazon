@@ -52,7 +52,7 @@ var createCart = function(ASIN,itemArray,shippingObj,cb){
 		// 	zipCode: "98456",
 		// 	phoneNumber: "8888888888"
 		// })
-		buyCart(cart.PurchaseURL,'test');
+		//buyCart(cart.PurchaseURL,'test');
 	});
 }
 
