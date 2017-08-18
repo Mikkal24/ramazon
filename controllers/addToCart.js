@@ -2,7 +2,7 @@
 //HMAC === kPCJHM883byycivvgjul78Yi/E4=
 
 var db = require("../models");
-var buyCart = require('./headlessChrome');
+//var buyCart = require('./headlessChrome');
 
 const {OperationHelper} = require('apac');
 
@@ -52,7 +52,7 @@ var createCart = function(ASIN,itemArray,shippingObj,cb){
 		// 	zipCode: "98456",
 		// 	phoneNumber: "8888888888"
 		// })
-		buyCart(cart.PurchaseURL,'test');
+		//buyCart(cart.PurchaseURL,'test');
 	});
 }
 
