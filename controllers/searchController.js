@@ -109,7 +109,7 @@ function handleSearchResults(response, cb){
 		}
 
 		console.log("How much money do we got left? A: $"+this.maximumPrice);
-		if(this.maximumPrice>300){
+		if(this.maximumPrice>100){
 			// we got more money left
 			var newSearch = amazonSearch.bind(this);
 			newSearch(cb);
@@ -164,8 +164,8 @@ router.post("/", function(req,res){
 		itemArray: [],
 		randomPage: randomPage,
 		searchOptions: searchOptions,
-		maximumPrice: req.body.range*100,
-		minimumPrice: 100,
+		maximumPrice: req.body.range*90,
+		minimumPrice: null
 		merchantId: 'Amazon'
 	}
 
