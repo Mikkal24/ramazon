@@ -73,19 +73,19 @@ var amazonSearch = function(cb){
 		'MerchantId': this.merchantId,
 		'ResponseGroup': 'ItemAttributes,Offers,Images'
 	}).then((response) => {
-		//console.log(JSON.stringify(response,null," "));
-		// console.log(response.result.ItemSearchResponse.Items.Request.Errors.Error.Code);
+		////console.log(JSON.stringify(response,null," "));
+		//// console.log(response.result.ItemSearchResponse.Items.Request.Errors.Error.Code);
 		var handler = handleSearchResults.bind(this);
 		handler(response,cb);
 	}).catch((err) => {
 		
 
-		console.log("Something went wrong! ",err);
-		console.log("searchIndex: "+ searchIndex);
-		console.log("ItemPage: "+ this.randomPage);
-		console.log("maxPrice: "+this.maximumPrice);
-		console.log("minimumPrice: "+this.minimumPrice);
-		console.log("sort: "+sort);
+		//console.log("Something went wrong! ",err);
+		//console.log("searchIndex: "+ searchIndex);
+		//console.log("ItemPage: "+ this.randomPage);
+		//console.log("maxPrice: "+this.maximumPrice);
+		//console.log("minimumPrice: "+this.minimumPrice);
+		//console.log("sort: "+sort);
 		//run the search again
 		self.randomPage = 1;
 		var newSearch = amazonSearch.bind(this);
@@ -97,15 +97,25 @@ function handleSearchResults(response, cb){
 	var pickOne = Math.floor(Math.random()*response.result.ItemSearchResponse.Items.Item.length);
 	var item = response.result.ItemSearchResponse.Items.Item[pickOne];
 	var itemPrice;
+	//console.log("---------------------------------------------------");
+	//console.log(item.Offers.Offer.OfferListing);
+	//console.log("---------------------------------------------------");
 	/********************************************
 	*        If there is a limit                *
 	********************************************/
 	if(this.maximumPrice !== null){
 		// Only add the item if it meets our requirements
-		if(typeof item.OfferSummary.LowestNewPrice !== 'undefined' && item.Offers.Offer.OfferListing.IsEligibleForPrime && item.Offers.Offer.OfferListing.AvailabilityAttributes.AvailabilityType === 'now'){
+		console.log("Is eligible for prime? A: "+item.Offers.Offer.OfferListing.IsEligibleForPrime);
+		if(typeof item.OfferSummary.LowestNewPrice !== 'undefined' && (item.Offers.Offer.OfferListing.IsEligibleForPrime === "1") && item.Offers.Offer.OfferListing.AvailabilityAttributes.AvailabilityType === 'now'){
 			itemPrice = item.Offers.Offer.OfferListing.Price.Amount;
-			this.itemArray.push(item);
-			this.maximumPrice = this.maximumPrice - itemPrice;
+			//itemPrice = item.OfferSummary.LowestNewPrice.Amount;
+			//console.log("The price should be: $"+item.Offers.Offer.OfferListing.Price.Amount);
+			if(itemPrice<this.maximumPrice){
+					//console.log("------------------OfferListing ID------------------")
+					//console.log(item.Offers.Offer.OfferListing.OfferListingId);
+					this.itemArray.push(item);
+					this.maximumPrice = this.maximumPrice - itemPrice;
+				}
 		}
 
 		console.log("How much money do we got left? A: $"+this.maximumPrice);
@@ -115,7 +125,7 @@ function handleSearchResults(response, cb){
 			newSearch(cb);
 		} else {
 			//Okay we've found all our items 
-			console.log(this.itemArray);
+			//console.log(this.itemArray);
 			cb(this.itemArray);
 
 		}
@@ -125,10 +135,12 @@ function handleSearchResults(response, cb){
 	}
 }
 
-function handleCart(itemArray,cb){
-	Cart.createCart(itemArray[0].ASIN, itemArray, cb);
-	console.log(cb);
-}
+// function handleCart(itemArray,cb){
+//// 	console.log("------------------OfferListing ID------------------")
+//// 	console.log(itemArray[0].Offers.Offer.OfferListing.OfferListingId);
+// 	//Cart.createCart(itemArray[0].Offers.Offer.OfferListing.OfferListingId, itemArray, cb);
+//// 	// console.log(cb);
+// }
 
 
 router.get("/", function(req,res){
@@ -165,14 +177,14 @@ router.post("/", function(req,res){
 		randomPage: randomPage,
 		searchOptions: searchOptions,
 		maximumPrice: req.body.range*90,
-		minimumPrice: null
-		merchantId: 'Amazon'
+		minimumPrice: 99,
+		merchantId: 'All'
 	}
 
 	var mySearch = amazonSearch.bind(queryObj);
 	mySearch(function(itemArray){
 		// go ahead and create a cart once we have our items
-		Cart.createCart(itemArray[0].ASIN, itemArray, shippingInfo, function(purchaseURL){
+		Cart.createCart(itemArray[0].Offers.Offer.OfferListing.OfferListingId, itemArray, shippingInfo, function(purchaseURL){
 			res.send(purchaseURL);
 		});
 	})

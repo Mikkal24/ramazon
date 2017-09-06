@@ -1,5 +1,8 @@
+
+var query = require("./query.js");
+// console.log(query);
 // Create a Stripe client
-var stripe = Stripe('pk_test_6pRNASCoBOKtIshFeQd4XMUh');
+var stripe = Stripe('pk_live_w9N7crnBKvsAHG40D81BznyH');
 
 // Create an instance of Elements
 var elements = stripe.elements();
@@ -51,7 +54,7 @@ form.addEventListener('submit', function(event) {
       errorElement.textContent = result.error.message;
     } else {
       // Send the token to your server
-      stripeTokenHandler(result.token);
+      query.stripeTokenHandler(result.token);
     }
   });
 });

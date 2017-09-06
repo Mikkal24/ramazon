@@ -6,6 +6,9 @@ const AmazonQuery = {
 	},
 	getRandomCart: function(data){
 		return axios.post("/search", data);
+	},
+	stripeTokenHandler: function(data){
+		return axios.post("/buy", data);
 	}
 }
 
