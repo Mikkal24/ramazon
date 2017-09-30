@@ -133,6 +133,14 @@ var BrowseBox = React.createClass({
 		$(".displayContainer").append(price);
 	},
 
+	resizeImage: function(){
+		var img = $("#browseImg")
+			if(img.height > img.width){
+				img.height='100%';
+				img.width='auto';
+			}
+	},
+
 	render: function(){
 		return(
 			<div className="centerThis arrowContainer">
@@ -144,7 +152,7 @@ var BrowseBox = React.createClass({
 				</div>
 				: null}
 				<div className="displayContainer">
-					<a href={this.state.url} target="_blank"><img className="browseImg" src={this.state.image}></img></a>
+					<a href={this.state.url} target="_blank"><img onload={this.resizeImage} id="browseImg" className="browseImg" src={this.state.image}></img></a>
 					<h5>{this.state.title}</h5>
 					<h5>{this.state.price}</h5>
 				</div>

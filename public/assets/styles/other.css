@@ -27,10 +27,6 @@
     min-width: 66%;
   }
 
-  img {
-  	width: 100%;
-  }
-
   .centerThis {
     display: flex;
     justify-content: center;
@@ -42,8 +38,7 @@
   }
   .displayContainer{
     width: 400px;
-    max-height: 600px;
-    overflow: auto;
+    overflow: hidden;
   }
 
   .displayContainer img{

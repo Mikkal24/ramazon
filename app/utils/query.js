@@ -9,6 +9,9 @@ const AmazonQuery = {
 	},
 	stripeTokenHandler: function(data){
 		return axios.post("/buy", data);
+	},
+	sendPurchaseData: function(){
+		return axios.post("/purchaseDAta", data);
 	}
 }
 

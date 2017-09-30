@@ -2,7 +2,7 @@
 //HMAC === kPCJHM883byycivvgjul78Yi/E4=
 
 var db = require("../models");
-var buyCart = require('./headlessChrome');
+//var buyCart = require('./headlessChrome');
 
 const {OperationHelper} = require('apac');
 
@@ -48,20 +48,21 @@ var createCart = function(offerListingId,itemArray,shippingObj,cb){
 		}
 		//console.log("trying to redirect");
 		//console.log(cb);
-		console.log(JSON.stringify(shippingObj,null," "));
-		console.log(cart.PurchaseURL);
-		console.log(typeof cart.PurchaseURL);
+		// console.log(JSON.stringify(shippingObj,null," "));
+		// console.log(cart.PurchaseURL);
+		// console.log(typeof cart.PurchaseURL);
+		console.log(shippingObj);
 		cb(cart.PurchaseURL)
-		// db.Cart.create({
-		// 	purchaseURL: cart.PurchaseURL,
-		// 	customerName: "Michael Sorensen",
-		// 	address: "8703 dummy dr.",
-		// 	city: "New York",
-		// 	state: "NY",
-		// 	zipCode: "98456",
-		// 	phoneNumber: "8888888888"
-		// })
-		buyCart(cart.PurchaseURL,'test');
+		db.Cart.create({
+			purchaseURL: cart.PurchaseURL,
+			customerName: shippingObj.customerName,
+			address: shippingObj.address1,
+			city: shippingObj.city,
+			state: shippingObj.state,
+			zipCode: shippingObj.zip,
+			phoneNumber: shippingObj.phoneNumber
+		})
+		//buyCart(cart.PurchaseURL,'test');
 	});
 }
 

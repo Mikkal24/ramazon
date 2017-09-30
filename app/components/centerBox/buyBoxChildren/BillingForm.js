@@ -21,6 +21,12 @@ var BillingForm = React.createClass({
 			$("#target").append(cartLink);
 		})
 	},
+
+	sendData: function(){
+		console.log(this.props.queryInfo);
+
+		
+	},
 	render: function(){
 		return(
 			<div>
@@ -39,8 +45,9 @@ var BillingForm = React.createClass({
 							   		</div>
 							    	<div id="card-errors" role="alert"></div>
 							 	</div>
-							  	<button>Submit Payment</button>
+								<button>Submit Payment</button>
 							</form>
+							<button id="buy" onClick={this.sendData}> Add information to database </button>
 						</div>
 					</div>
 				</div>

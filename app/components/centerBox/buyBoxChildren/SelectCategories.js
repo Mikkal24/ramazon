@@ -102,8 +102,8 @@ var SelectCategories = React.createClass({
 
 	render: function(){
 		return(
-			<div className="centerThis">
-				<div className="fifty-percent amazonYellowBorder">
+			<div className="centerThis ">
+				<div className="fifty-percent amazonYellowBorder decentPadding">
 					<h1>Select Interests</h1>
 					<div className="row">
 					<a id="all" className="col s4 offset-s4 align btn red">All</a>
