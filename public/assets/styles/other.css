@@ -5,10 +5,20 @@
   }
 
 
-  main {
+  #main1 {
     flex: 1 0 auto;
   }
 
+  #quoteBox {
+    position:absolute;
+  }
+
+  .homeBackground {
+    background-image:  url("../homeBackground.png");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 
   .page-footer {
   	padding: 0px;
@@ -19,6 +29,7 @@
   	border: solid 3px;
   	border-color: #fb9701;
   	padding: 20px;
+    background-color: #ffffff;
   }
 
   .amazonYellowBorder {
@@ -141,7 +152,7 @@
    /* this is just icing */body {
    font-family: "Oswald", Helvetica, Arial, sans-serif;
      font-weight: 300;
-     text-transform: uppercase;
+     /*text-transform: uppercase;*/
      padding: 0;
      margin: 0;
  }

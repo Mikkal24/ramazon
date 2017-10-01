@@ -11,7 +11,7 @@ const AmazonQuery = {
 		return axios.post("/buy", data);
 	},
 	sendPurchaseData: function(){
-		return axios.post("/purchaseDAta", data);
+		return axios.post("/purchaseData", data);
 	}
 }
 

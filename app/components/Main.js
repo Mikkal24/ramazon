@@ -9,9 +9,11 @@ var Main = React.createClass({
 				<header>
 					<Navbar />
 				</header>
-				<main className="centerThis">
+				<div id="main1" className = "centerThis">
 					{this.props.children}
-				</main>
+					
+				</div>
+
 				<footer className="amazonBlue page-footer">
 					<Footer />
 				</footer>

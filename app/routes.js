@@ -7,12 +7,20 @@ import BuyOrBrowse from "./components/centerBox/BuyOrBrowse"
 import BrowseBox from "./components/centerBox/BrowseBox"
 import BuyBox from "./components/centerBox/BuyBox"
 
+var setBackground = function(){
+		$("#main1").addClass("homeBackground");
+		console.log($("#main1"));
+	}
+var removeBackground = function(){
+		$("#main1").removeClass("homeBackground");
+	}
+
 const routes = (
 	<Router history={browserHistory}>
 		<Route path="/" component={Main}>
 			<Route path="/browse" component={BrowseBox} />
 			<Route path="/buy" component={BuyBox} />
-			<IndexRoute component={BuyOrBrowse}/>
+			<IndexRoute component={BuyOrBrowse} setBackground={setBackground} removeBackground={removeBackground}/>
 		</Route>
 	</Router>
 	);
