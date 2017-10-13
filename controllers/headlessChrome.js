@@ -34,6 +34,10 @@ async function buyCart(purchaseUrl, shippingInfo) {
 
     await mainTab.click('input[name=shipToThisAddress]');
 
+    await mainTab.wait(5000);
+    console.log("trying to click continue...")
+    await mainTab.click('input[type=submit]');
+
     // const htmlTag = await mainTab.evaluate(function(selector) {
     //     const selectorHtml = document.querySelector(selector)
     //     return selectorHtml.innerHTML;
