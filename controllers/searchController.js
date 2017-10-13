@@ -73,8 +73,6 @@ var amazonSearch = function(cb){
 		'MerchantId': this.merchantId,
 		'ResponseGroup': 'ItemAttributes,Offers,Images'
 	}).then((response) => {
-		////console.log(JSON.stringify(response,null," "));
-		//// console.log(response.result.ItemSearchResponse.Items.Request.Errors.Error.Code);
 		var handler = handleSearchResults.bind(this);
 		handler(response,cb);
 	}).catch((err) => {
@@ -97,9 +95,7 @@ function handleSearchResults(response, cb){
 	var pickOne = Math.floor(Math.random()*response.result.ItemSearchResponse.Items.Item.length);
 	var item = response.result.ItemSearchResponse.Items.Item[pickOne];
 	var itemPrice;
-	//console.log("---------------------------------------------------");
-	//console.log(item.Offers.Offer.OfferListing);
-	//console.log("---------------------------------------------------");
+
 	/********************************************
 	*        If there is a limit                *
 	********************************************/
@@ -108,11 +104,8 @@ function handleSearchResults(response, cb){
 		console.log("Is eligible for prime? A: "+item.Offers.Offer.OfferListing.IsEligibleForPrime);
 		if(typeof item.OfferSummary.LowestNewPrice !== 'undefined' && (item.Offers.Offer.OfferListing.IsEligibleForPrime === "1") && item.Offers.Offer.OfferListing.AvailabilityAttributes.AvailabilityType === 'now'){
 			itemPrice = item.Offers.Offer.OfferListing.Price.Amount;
-			//itemPrice = item.OfferSummary.LowestNewPrice.Amount;
-			//console.log("The price should be: $"+item.Offers.Offer.OfferListing.Price.Amount);
+
 			if(itemPrice<this.maximumPrice){
-					//console.log("------------------OfferListing ID------------------")
-					//console.log(item.Offers.Offer.OfferListing.OfferListingId);
 					this.itemArray.push(item);
 					this.maximumPrice = this.maximumPrice - itemPrice;
 				}
@@ -120,17 +113,13 @@ function handleSearchResults(response, cb){
 
 		console.log("How much money do we got left? A: $"+this.maximumPrice);
 		if(this.maximumPrice>100){
-			// we got more money left
 			var newSearch = amazonSearch.bind(this);
 			newSearch(cb);
 		} else {
-			//Okay we've found all our items 
-			//console.log(this.itemArray);
 			cb(this.itemArray);
 
 		}
 	} else {
-		//Or else there is no limit !!
 		cb([item]);
 	}
 }

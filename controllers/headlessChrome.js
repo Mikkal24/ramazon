@@ -11,20 +11,35 @@ async function buyCart(purchaseUrl, shippingInfo) {
     await mainTab.wait(5000);
     await mainTab.goTo(purchaseUrl);
     await mainTab.click('input[name=add]');
+    await mainTab.goTo
     await mainTab.wait(5000);
     await mainTab.click('input[name=proceedToCheckout]');
     await mainTab.wait(5000);
-    await mainTab.setValue('#ap_email','dsorensen33@icloud.com')
-    await mainTab.setValue('#ap_password', '8Wonders!')
+    await mainTab.setValue('#ap_email','boxfullofrandom@gmail.com')
+    await mainTab.setValue('#ap_password', '$Pajarit0')
     await mainTab.click('#signInSubmit')
-    await mainTab.wait(1000)
-    // await mainTab.goTo('https://www.amazon.com/gp/cart/view.html/ref=nav_cart');
+    await mainTab.wait(5000);
 
-    const htmlTag = await mainTab.evaluate(function(selector) {
-        const selectorHtml = document.querySelector(selector)
-        return selectorHtml.innerHTML;
-    }, '.grand-total-price');
-    console.log(htmlTag.result.value);
+    // THIS ONLY WORKS FOR AMAZON PRIME
+    // await mainTab.click('#addressChangeLinkId');
+    // await mainTab.click("#add-new-address-popover-link");
+        console.log("trying to set address values");
+    await mainTab.setValue('#enterAddressFullName', shippingInfo.customerName);
+    await mainTab.setValue('#enterAddressAddressLine1', shippingInfo.address);
+    // await mainTab.setValue('#enterAddressAddressLine2', shippingInfo.);
+    await mainTab.setValue('#enterAddressCity', shippingInfo.city);
+    await mainTab.setValue('#enterAddressStateOrRegion', shippingInfo.state);
+    await mainTab.setValue('#enterAddressPostalCode', shippingInfo.zipCode);
+    await mainTab.setValue('#enterAddressPhoneNumber', shippingInfo.phoneNumber);
+
+    await mainTab.click('input[name=shipToThisAddress]');
+
+    // const htmlTag = await mainTab.evaluate(function(selector) {
+    //     const selectorHtml = document.querySelector(selector)
+    //     return selectorHtml.innerHTML;
+    // }, '.grand-total-price');
+
+    // console.log(htmlTag.result.value);
     //await browser.close()
   } catch (err) {
     console.log('ERROR!', err)

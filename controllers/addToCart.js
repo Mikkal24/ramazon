@@ -2,7 +2,7 @@
 //HMAC === kPCJHM883byycivvgjul78Yi/E4=
 
 var db = require("../models");
-//var buyCart = require('./headlessChrome');
+// var buyCart = require('./headlessChrome');
 
 const {OperationHelper} = require('apac');
 
@@ -46,23 +46,21 @@ var createCart = function(offerListingId,itemArray,shippingObj,cb){
 			console.log("adding THIS to my cart"+itemArray[i].Offers.Offer.OfferListing.OfferListingId);
 			addToCart(itemArray[i].Offers.Offer.OfferListing.OfferListingId, cart.CartId, cart.HMAC)
 		}
-		//console.log("trying to redirect");
-		//console.log(cb);
-		// console.log(JSON.stringify(shippingObj,null," "));
-		// console.log(cart.PurchaseURL);
-		// console.log(typeof cart.PurchaseURL);
+		
 		console.log(shippingObj);
 		cb(cart.PurchaseURL)
-		db.Cart.create({
+		db.Orders.create({
+			OrderID: Date.now(),
 			purchaseURL: cart.PurchaseURL,
 			customerName: shippingObj.customerName,
 			address: shippingObj.address1,
 			city: shippingObj.city,
 			state: shippingObj.state,
 			zipCode: shippingObj.zip,
-			phoneNumber: shippingObj.phoneNumber
+			phoneNumber: shippingObj.phoneNumber,
+			status: "pending"
 		})
-		//buyCart(cart.PurchaseURL,'test');
+		// buyCart(cart.PurchaseURL,'test');
 	});
 }
 

@@ -1,5 +1,9 @@
 module.exports = function(sequelize, DataTypes){
-	var Cart = sequelize.define("Cart", {
+	var Orders  = sequelize.define("Orders", {
+		OrderID: {
+			type: DataTypes.DOUBLE,
+			allowNull: false
+		},
 		purchaseURL: {
 			type: DataTypes.STRING,
 			allowNull: false,
@@ -31,8 +35,12 @@ module.exports = function(sequelize, DataTypes){
 		phoneNumber: {
 			type: DataTypes.STRING,
 			allowNull: false
+		},
+		status: {
+			type: DataTypes.STRING,
+			allowNull: false
 		}
 	});
 
-	return Cart;
+	return Orders;
 }
