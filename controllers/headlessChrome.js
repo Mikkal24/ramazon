@@ -38,6 +38,16 @@ async function buyCart(purchaseUrl, shippingInfo) {
     console.log("trying to click continue...")
     await mainTab.click('input[type=submit]');
 
+    await mainTab.click('#pm_0');
+    // await mainTab.setValue('#addCreditCardNumber', "4300640137667889")
+    // await mainTab.click('#confirm-card');
+    // await mainTab.wait(1000);
+    await mainTab.click('#continue-top');
+    await mainTab.wait(3000);
+    await mainTab.goTo("https://www.amazon.com/gp/buy/prime/handler.html/ref=student_pip_ip_nt_pft?redirectPath=/gp/prime/pip/proceed.html&ie=UTF8&action.checkoutInterstitialDecline=1");
+    await mainTab.wait(3000);
+    await mainTab.click('input[name=placeYourOrder1]')
+    console.log("please for the love of god work")
     // const htmlTag = await mainTab.evaluate(function(selector) {
     //     const selectorHtml = document.querySelector(selector)
     //     return selectorHtml.innerHTML;

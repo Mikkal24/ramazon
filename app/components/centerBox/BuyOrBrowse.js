@@ -10,6 +10,17 @@ var quoteList = [
 	"At least that 64 pck of toilet paper is more usefull than some anime stickers...",
 	"A critical failure can be more fun than a critical success with the right mindset",
 	"¯\\_(ツ)_/¯",
+	"You know you want something",
+	"For when youre not sure what you want",
+	"A surprise in every box ",
+	"Loot crate with irl Loot ",
+	"Discover a new dream",
+	"unlock a hidden talent",
+	"find your next passion",
+	"not another god damn_____",
+	"show off to your neighbors with your new",
+	"all the fun of gift giving/none of the stress of picking the wrong thign",
+	"big surprises come in small packages"
 ]
 
 var BuyOrBrowse = React.createClass({
