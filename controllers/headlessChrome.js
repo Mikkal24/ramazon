@@ -16,7 +16,7 @@ async function buyCart(purchaseUrl, shippingInfo) {
     await mainTab.click('input[name=proceedToCheckout]');
     await mainTab.wait(5000);
     await mainTab.setValue('#ap_email','boxfullofrandom@gmail.com')
-    await mainTab.setValue('#ap_password', '$Pajarit0')
+    await mainTab.setValue('#ap_password', '')
     await mainTab.click('#signInSubmit')
     await mainTab.wait(5000);
 
