@@ -1,12 +1,14 @@
-var React = require("react");
+import React, { Component } from 'react';
 // var stripe = require("stripe")('pk_test_5d9CqeRNmhQBq86Qj1slB5sj');
-
-let query = require("../../../utils/query")
-var BillingForm = React.createClass({
-	componentDidMount: function(){
-		var stripejs = require("../../../utils/stripe");
+import query from "../../../utils/query"
+import stripejs from "../../../utils/stripe";
 
 
+class BillingForm extends Component{
+	constructor(props){
+		super(props);
+	}
+	componentDidMount = () =>{
 		let queryObj = {
 			SearchIndex: this.props.queryInfo.categories,
 			range: this.props.queryInfo.amount,
@@ -20,14 +22,12 @@ var BillingForm = React.createClass({
 				.text("But you can see what you would have got!");
 			$("#target").append(cartLink);
 		})
-	},
+	}
 
-	sendData: function(){
+	sendData = () =>{
 		console.log(this.props.queryInfo);
-
-		
-	},
-	render: function(){
+	}
+	render = () =>{
 		return(
 			<div>
 				<h1>Stripe Billing Form Coming soon</h1>
@@ -54,40 +54,9 @@ var BillingForm = React.createClass({
 				<p id="target" className="center-align"></p>
 			
 			</div>
-			)
+		)
 	}
-});
+}
 
-module.exports = BillingForm;
+export default BillingForm;
 
-
-// My Form
-
-// <form>
-// 	<div className="row">
-// 		<div className="input-field col s12">
-// 			<input placeholder="John Doe" id="name" type="text" className="validate"></input>
-// 			<label htmlFor="name" className="active">Name</label>
-// 		</div>
-// 	</div>
-// 	<div className="row">
-// 		<div className="input-field col s8">
-// 			<input placeholder="xxxx xxxx xxxx xxxx" id="card" type="text" className="validate"></input>
-// 			<label htmlFor="card" className="active">Card</label>
-// 		</div>
-// 		<div className="input-field col s4">
-// 			<input placeholder="MM/YY" id="expirationDate" type="text" className="validate"></input>
-// 			<label htmlFor="expirationDate" className="active">Expiration Date</label>
-// 		</div>
-// 	</div>
-// 	<div className="row">
-// 		<div className="input-field col s6">
-// 			<input placeholder="CVV" id="CVV" type="text" className="validate"></input>
-// 			<label htmlFor="CVV" className="active">CVV</label>
-// 		</div>
-// 		<div className="input-field col s6">
-// 			<input placeholder="00000" id="zipCode" type="text" className="validate"></input>
-// 			<label htmlFor="zipCode" className="active">ZIP</label>
-// 		</div> 
-// 	</div>
-// </form>

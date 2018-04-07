@@ -1,12 +1,9 @@
-var React = require("react");
+import React from "react";
 
-var SignIn = React.createClass({
-	render: function(){
-		return(
+var SignIn = (
 			<div>
 			</div>
 			)
-	}
-});
 
-module.exports = SignIn;
+
+export default SignIn;

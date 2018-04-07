@@ -1,12 +1,9 @@
-var React = require("react");
+import  React from  "react";
 
-var Contact = React.createClass({
-	render: function(){
-		return(
+Contact = (props)  => (
 			<div>
 			</div>
 			)
-	}
-});
 
-module.exports = Contact;
+
+export default Contact;
