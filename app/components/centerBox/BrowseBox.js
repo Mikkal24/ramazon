@@ -1,11 +1,10 @@
-var React = require("react");
-let query
+import React, { Component } from 'react';
+import query from '../../utils/query';
 
-var BrowseBox = React.createClass({
-	getInitialState: function(){
-		query = require("../../utils/query");
-
-		return({
+class BrowseBox extends Component{
+	constructor(props){
+		super(props);
+		this.state = {
 			image: "",
 			title: "",
 			description: "",
@@ -15,18 +14,19 @@ var BrowseBox = React.createClass({
 			maxCount: 0,
 			pastSearches: [],
 			showLeftArrow: false
-		})
-	},
+		}
+	}
 
-	componentDidMount: function(){
+	componentDidMount = () =>{
 		this.search();
-	},
-	componentDidUpdate: function(){
+	}
+
+	componentDidUpdate = () =>{
 		console.log("component Will Update");
 		this.renderBrowseContainer();
-	},
-	search: function(){
+	}
 
+	search = () => {
 		var self = this;
 		console.log(self.state);
 		if(self.state.maxCount===self.state.currentCount){
@@ -57,9 +57,9 @@ var BrowseBox = React.createClass({
 		})} else {
 			this.goForward();
 		}
-	},
+	}
 
-	goBack: function(){
+	goBack = () =>{
 		var currentCount = this.state.currentCount-1;
 
 		var response = this.state.pastSearches[currentCount-1];
@@ -78,9 +78,9 @@ var BrowseBox = React.createClass({
 			showLeftArrow: leftArrowStatus
 		})
 
-	},
+	}
 
-	goForward: function(){
+	goForward = () =>{
 		var currentCount = this.state.currentCount+1;
 		
 		var response = this.state.pastSearches[currentCount-1];
@@ -100,9 +100,9 @@ var BrowseBox = React.createClass({
 			showLeftArrow: leftArrowStatus
 		});
 		
-	},
+	}
 
-	renderSpinner: function(){
+	renderSpinner = () =>{
 		console.log("attempting to empty the displayContainer");
 		$(".displayContainer").empty();
 		var spinnerDiv = $("<div>").addClass("sk-folding-cube");
@@ -111,9 +111,9 @@ var BrowseBox = React.createClass({
 		spinnerDiv.append($("<div>").addClass("sk-cube4 sk-cube"));
 		spinnerDiv.append($("<div>").addClass("sk-cube3 sk-cube"));
 		$(".displayContainer").append(spinnerDiv);
-	},
+	}
 
-	renderBrowseContainer: function(){
+	renderBrowseContainer = () =>{
 		console.log(this.state);
 		$(".displayContainer").empty();
 		var link = $("<a>").attr({
@@ -131,17 +131,17 @@ var BrowseBox = React.createClass({
 		$(".displayContainer").append(link);
 		$(".displayContainer").append(title);
 		$(".displayContainer").append(price);
-	},
+	}
 
-	resizeImage: function(){
+	resizeImage = () =>{
 		var img = $("#browseImg")
 			if(img.height > img.width){
 				img.height='100%';
 				img.width='auto';
 			}
-	},
+	}
 
-	render: function(){
+	render = () =>{
 		return(
 			<div className="centerThis arrowContainer">
 			{this.state.showLeftArrow ? 
@@ -164,6 +164,6 @@ var BrowseBox = React.createClass({
 			</div>
 			)
 	}
-});
+};
 
-module.exports = BrowseBox;
+export default BrowseBox;

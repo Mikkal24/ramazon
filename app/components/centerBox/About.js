@@ -1,8 +1,5 @@
-var React = require("react");
 
-var About = React.createClass({
-	render: function(){
-		return(
+const About = (
 			<div className="container">
 				<h1>About Ramazon...</h1>
 				<p className="center">I honestly did not expect anyone to read this page but here you are</p>
@@ -38,7 +35,6 @@ var About = React.createClass({
 
 			</div>
 			)
-	}
-});
 
-module.exports = About;
+
+export default About;

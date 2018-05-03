@@ -1,4 +1,4 @@
-var React = require("react");
+import React, { Component } from 'react';
 
 var quoteList = [
 	"Buy a little surprise for yourself or for the birthday of that one guy you don't know anything about",
@@ -23,9 +23,9 @@ var quoteList = [
 	"big surprises come in small packages"
 ]
 
-var BuyOrBrowse = React.createClass({
+class BuyOrBrowse extends Component{
 
-	componentDidMount: function(){
+	componentDidMount(){
 		console.log(this.props.route);
 		this.props.route.setBackground();
 		var randomQuote = quoteList[Math.floor(Math.random()*quoteList.length)];
@@ -36,7 +36,7 @@ var BuyOrBrowse = React.createClass({
 	componentWillUnmount(){
 		this.props.route.removeBackground();
 	},
-	render: function(){
+	render(){
 		return(
 			<div>
 				<div className="row">
@@ -51,6 +51,6 @@ var BuyOrBrowse = React.createClass({
 
 			)
 	}
-});
+};
 
 module.exports = BuyOrBrowse;

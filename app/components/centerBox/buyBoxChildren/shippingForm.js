@@ -1,7 +1,7 @@
-var React = require("react");
-var shippingForm = React.createClass({
+import React, { Component } from 'react';
+class shippingForm extends Component{
 
-	getFormInfo: function(event){
+	getFormInfo = (event) =>{
 		event.preventDefault();
 		var formArray = $("#shippingForm").serializeArray();
 		var formObject = {};
@@ -12,9 +12,9 @@ var shippingForm = React.createClass({
 		console.log(formObject);
 		this.props.setShippingInfo(formObject);
 		this.props.nextHandler();
-	},
+	}
 
-	checkFields: function(event){
+	checkFields = (event) => {
 		event.preventDefault();
 		var isValidated=true;
 		$(".required").each(function(){
@@ -29,9 +29,9 @@ var shippingForm = React.createClass({
 			$("#nextButton").attr('disabled', 'disabled');
 		}
 
-	},
+	}
 
-	render: function(){
+	render = () => {
 		return(
 			<div className="centerThis">
 				<div className="amazonYellowBorder fifty-percent decentPadding">
@@ -92,6 +92,6 @@ var shippingForm = React.createClass({
 			</div>
 			)
 	}
-});
+};
 
-module.exports = shippingForm;
+export default shippingForm;

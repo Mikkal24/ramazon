@@ -1,21 +1,24 @@
-var React = require("react");
-var SelectAmount = React.createClass({
-	select5: function(){
+import React, { Component } from 'react';
+class SelectAmount extends Component{
+	constructor(props){
+		super(props);
+	}
+	select5 = () =>{
 		this.props.setAmount(5);
 		this.props.nextHandler();
-	},
+	}
 
-	select20: function(){
+	select20 = () =>{
 		this.props.setAmount(20);
 		this.props.nextHandler();
-	},
+	}
 
-	select100: function(){
+	select100 = () =>{
 		this.props.setAmount(100);
 		this.props.nextHandler();
-	},
+	}
 
-	render: function(){
+	render = () =>{
 		return(
 				<div className="amazonYellowBorder row decentPadding">
 					<div className="col s4">
@@ -36,6 +39,6 @@ var SelectAmount = React.createClass({
 				</div>
 			)
 	}
-});
+};
 
-module.exports = SelectAmount; 
+export default SelectAmount;

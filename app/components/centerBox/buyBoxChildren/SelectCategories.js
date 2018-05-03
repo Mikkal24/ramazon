@@ -1,45 +1,46 @@
-var React = require("react");
-var SelectCategories = React.createClass({
-	getInitialState: function(){
-		var options = [
-			{name:'Appliances', selected: false},
-			{name:'ArtsAndCrafts', selected: false},
-			{name:'Automotive', selected: false},
-			{name:'Baby', selected: false},
-			{name:'Beauty', selected: false},
-			{name:'Books', selected: false},
-			{name:'Collectibles', selected: false},
-			{name:'Electronics', selected: false},
-			{name:'Fashion', selected: false},
-			//{name:'Handmade', selected: false},
-			{name:'HealthPersonalCare', selected: false},
-			{name:'HomeGarden', selected: false},
-			{name:'Industrial', selected: false},
-			{name:'LawnAndGarden', selected: false},
-			{name:'Luggage', selected: false},
-			{name:'Magazines', selected: false},
-			//{name:'MobileApps', selected: false},
-			{name:'Movies', selected: false},
-			{name:'Music', selected: false},
-			{name:'MusicalInstruments', selected: false},
-			{name:'OfficeProducts', selected: false},
-			{name:'Pantry', selected: false},
-			{name:'PCHardware', selected: false},
-			{name:'PetSupplies', selected: false},
-			{name:'Software', selected: false},
-			{name:'SportingGoods', selected: false},
-			{name:'Tools', selected: false},
-			{name:'Toys', selected: false},
-			//{name:'UnboxVideo', selected: false},
-			{name:'VideoGames', selected: false},
-			{name:'Wine', selected: false},
-			{name:'Wireless', selected: false}]
-		return({
-			indexArray: options
-		})
-	},
+import React, { Component } from 'react';
 
-	flagSelected: function(id){
+class SelectCategories extends Component{
+	constructor(props){
+		this.state ={
+			indexArray: [
+				{name:'Appliances', selected: false},
+				{name:'ArtsAndCrafts', selected: false},
+				{name:'Automotive', selected: false},
+				{name:'Baby', selected: false},
+				{name:'Beauty', selected: false},
+				{name:'Books', selected: false},
+				{name:'Collectibles', selected: false},
+				{name:'Electronics', selected: false},
+				{name:'Fashion', selected: false},
+				//{name:'Handmade', selected: false},
+				{name:'HealthPersonalCare', selected: false},
+				{name:'HomeGarden', selected: false},
+				{name:'Industrial', selected: false},
+				{name:'LawnAndGarden', selected: false},
+				{name:'Luggage', selected: false},
+				{name:'Magazines', selected: false},
+				//{name:'MobileApps', selected: false},
+				{name:'Movies', selected: false},
+				{name:'Music', selected: false},
+				{name:'MusicalInstruments', selected: false},
+				{name:'OfficeProducts', selected: false},
+				{name:'Pantry', selected: false},
+				{name:'PCHardware', selected: false},
+				{name:'PetSupplies', selected: false},
+				{name:'Software', selected: false},
+				{name:'SportingGoods', selected: false},
+				{name:'Tools', selected: false},
+				{name:'Toys', selected: false},
+				//{name:'UnboxVideo', selected: false},
+				{name:'VideoGames', selected: false},
+				{name:'Wine', selected: false},
+				{name:'Wireless', selected: false}
+			]
+		}
+	}
+
+	flagSelected = (id) =>{
 		let newIndexArray = this.state.indexArray;
 		for(var i=0;i<newIndexArray.length;i++){
 			if(newIndexArray[i].name===id){
@@ -48,30 +49,30 @@ var SelectCategories = React.createClass({
 		}
 
 		this.setState({indexArray:newIndexArray});
-	},
+	}
 
-	flagAll: function(){
+	flagAll = () =>{
 		let newIndexArray = this.state.indexArray;
 		for (var i=0;i<newIndexArray.length;i++){
 			newIndexArray[i].selected = true;
 		}
 
 		this.setState({indexArray: newIndexArray});
-	},
+	}
 
 	// componentDidUpdate: function(){
 	// 	console.log(this.state);
 	// },
 
-	componentDidMount: function(){
+	componentDidMount = () =>{
 		var self = this;
 		for(var i = 0;i<this.state.indexArray.length;i++){
 			$("#target").append($("<a>")
-						.attr({
-							"class": "btn interest col s2",
-							"id":this.state.indexArray[i].name				
-							})
-						.text(this.state.indexArray[i].name));
+			.attr({
+				"class": "btn interest col s2",
+				"id":this.state.indexArray[i].name				
+				})
+			.text(this.state.indexArray[i].name));
 		}
 
 		$(".interest").click(function(event){
@@ -85,9 +86,9 @@ var SelectCategories = React.createClass({
 			$(".interest").addClass("red");
 			self.flagAll();
 		})
-	},
+	}
 
-	getInfo: function(){
+	getInfo = () =>{
 		let selectedCategories = [];
 
 		for(var i=0; i<this.state.indexArray.length;i++){
@@ -98,9 +99,9 @@ var SelectCategories = React.createClass({
 
 		this.props.setCategories(selectedCategories);
 		this.props.nextHandler();
-	},
+	}
 
-	render: function(){
+	render = () =>{
 		return(
 			<div className="centerThis ">
 				<div className="fifty-percent amazonYellowBorder decentPadding">
@@ -119,6 +120,6 @@ var SelectCategories = React.createClass({
 			</div>
 			)
 	}
-});
+};
 
-module.exports = SelectCategories; 
+export default SelectCategories; 

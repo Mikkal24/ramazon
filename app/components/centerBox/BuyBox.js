@@ -1,14 +1,15 @@
-var React = require("react");
-var SelectCategories = require("./buyBoxChildren/SelectCategories");
-var ShippingForm = require("./buyBoxChildren/ShippingForm");
-var BillingForm = require("./buyBoxChildren/BillingForm");
-var SelectAmount = require("./buyBoxChildren/SelectAmount");
+import React, { Component } from 'react';
+import  SelectCategories from "./buyBoxChildren/SelectCategories"
+import  ShippingForm from "./buyBoxChildren/ShippingForm"
+import  BillingForm from "./buyBoxChildren/BillingForm"
+import  SelectAmount from "./buyBoxChildren/SelectAmount"
 
 
 
-var BuyBox = React.createClass({
-	getInitialState: function(){
-		return({
+class BuyBox extends Component{
+	constructor(props){
+		super(props);
+		this.state = {
 			step: 1,
 			categories: [],
 			amount: 0,
@@ -21,30 +22,30 @@ var BuyBox = React.createClass({
 				state: "",
 				zip: ""
 			}
-		})
-	},
+		}
+	}
 
-	componentDidUpdate: function(){
+	componentDidUpdate = () => {
 		console.log(this.state);
-	},
+	}
 
-	nextHandler: function(){
+	nextHandler = () =>{
 		this.setState({step:this.state.step+1});
-	},
+	}
 
-	setShippingInfo(data){
+	setShippingInfo = (data) => {
 		this.setState({shippingInfo: data});
-	},
-	setAmount(data){
+	}
+
+	setAmount = (data) =>{
 		this.setState({amount: data});
 	},
 
-	setCategories(data){
+	setCategories = (data) =>{
 		this.setState({categories: data});
-	},
+	}
 
-	render: function(){
-
+	render = () => {
 		switch(this.state.step){
 			case 1:
 				return(
@@ -71,6 +72,6 @@ var BuyBox = React.createClass({
 				 )
 		}
 	}
-});
+};
 
-module.exports = BuyBox;
+export default BuyBox;

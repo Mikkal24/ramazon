@@ -1,7 +1,5 @@
 var React = require("react");
-var Navbar = React.createClass({
-	render: function(){
-		return(
+var Navbar = (
 			<div>
 				<nav className="amazonBlue">
 					<div className="nav-wrapper">
@@ -15,7 +13,5 @@ var Navbar = React.createClass({
 				</nav>
 			</div>
 			)
-	}
-});
 
-module.exports = Navbar;
+export default Navbar;
