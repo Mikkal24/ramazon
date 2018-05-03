@@ -7,9 +7,9 @@ const {OperationHelper} = require('apac');
 
 //Static stuff
 const opHelper = new OperationHelper({
-	awsId: 'AKIAIR3WJ4VCLLYEGLLQ',
-    awsSecret: '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',
-    assocId:   'atchotes-20',
+	awsId: 'AKIAIHIGFNCHVYIW56EQ',
+    awsSecret: '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',
+    assocId:   'ramazon00-20',
     maxRequestsPerSecond: 1
 });
 

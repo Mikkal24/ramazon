@@ -4,7 +4,7 @@ var routes = require("./routes/routes");
 var db = require("./models");
 
 
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 8000;
 
 var app = express();
 app.use(bodyParser.json());
