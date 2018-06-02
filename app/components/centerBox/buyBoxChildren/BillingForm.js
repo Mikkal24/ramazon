@@ -13,14 +13,6 @@ class BillingForm extends Component {
       range: this.props.queryInfo.amount,
       shippingAddress: this.props.queryInfo.shippingInfo
     };
-
-    // query.getRandomCart(queryObj).then(response => {
-    //   var cartLink = $("<a>")
-    //     .addClass("btn orange")
-    //     .attr({ href: response.data, target: "_blank" })
-    //     .text("But you can see what you would have got!");
-    //   $("#target").append(cartLink);
-    // });
   };
 
   sendData = () => {
