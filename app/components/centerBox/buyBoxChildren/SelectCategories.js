@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import OptionButton from "./OptionButton";
 
 class SelectCategories extends Component {
   constructor(props) {
@@ -61,36 +62,6 @@ class SelectCategories extends Component {
     this.setState({ indexArray: newIndexArray });
   };
 
-  // componentDidUpdate: function(){
-  // 	console.log(this.state);
-  // },
-
-  componentDidMount = () => {
-    var self = this;
-    for (var i = 0; i < this.state.indexArray.length; i++) {
-      $("#target").append(
-        $("<a>")
-          .attr({
-            class: "btn interest col s2",
-            id: this.state.indexArray[i].name
-          })
-          .text(this.state.indexArray[i].name)
-      );
-    }
-
-    $(".interest").click(function(event) {
-      event.preventDefault();
-      $("#" + this.id).addClass("red");
-      self.flagSelected(this.id);
-    });
-
-    $("#all").click(function(event) {
-      event.preventDefault();
-      $(".interest").addClass("red");
-      self.flagAll();
-    });
-  };
-
   getInfo = () => {
     let selectedCategories = [];
 
@@ -105,6 +76,9 @@ class SelectCategories extends Component {
   };
 
   render = () => {
+    const categoryButtons = this.state.indexArray.map(category => {
+      return <OptionButton name={category.name} flag={this.flagSelected} />;
+    });
     return (
       <div className="centerThis ">
         <div className="fifty-percent amazonYellowBorder decentPadding">
@@ -114,7 +88,9 @@ class SelectCategories extends Component {
               All
             </a>
           </div>
-          <div id="target" className="row" />
+          <div id="target" className="row">
+            {categoryButtons}
+          </div>
           <br />
           <div>
             <p className="center-align">

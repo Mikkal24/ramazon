@@ -82,13 +82,6 @@ var amazonSearch = function(cb) {
       handler(response, cb);
     })
     .catch(err => {
-      //console.log("Something went wrong! ",err);
-      //console.log("searchIndex: "+ searchIndex);
-      //console.log("ItemPage: "+ this.randomPage);
-      //console.log("maxPrice: "+this.maximumPrice);
-      //console.log("minimumPrice: "+this.minimumPrice);
-      //console.log("sort: "+sort);
-      //run the search again
       self.randomPage = 1;
       var newSearch = amazonSearch.bind(this);
       newSearch(cb);
