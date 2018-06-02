@@ -27,7 +27,7 @@ var quoteList = [
 class BuyOrBrowse extends Component {
   componentDidMount() {
     var randomQuote = quoteList[Math.floor(Math.random() * quoteList.length)];
-    $("#quoteBox").html(randomQuote);
+    document.getElementById("quoteBox").innerHTML = randomQuote;
   }
 
   render() {

@@ -140,10 +140,10 @@ class BrowseBox extends Component {
   };
 
   resizeImage = () => {
-    var img = $("#browseImg");
-    if (img.height > img.width) {
-      img.height = "100%";
-      img.width = "auto";
+    var img = document.getElementById("browseImg");
+    if (img.clientHeight > img.clientWidth) {
+      img.style.height = "100%";
+      img.stye.width = "auto";
     }
   };
 
