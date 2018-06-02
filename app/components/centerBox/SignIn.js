@@ -1,9 +1,5 @@
 import React from "react";
 
-var SignIn = (
-			<div>
-			</div>
-			)
-
+var SignIn = () => <div />;
 
 export default SignIn;
