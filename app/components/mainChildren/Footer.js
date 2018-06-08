@@ -1,10 +1,8 @@
 import React from "react";
 const Footer = () => (
-  <div>
-    <div className="footer-copyright">
-      <div className="container">© 2017 Ramazon Inc.</div>
-    </div>
-  </div>
+  <footer>
+    <div>© 2017 Ramazon Inc.</div>
+  </footer>
 );
 
 export default Footer;
