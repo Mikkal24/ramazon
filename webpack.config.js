@@ -1,4 +1,4 @@
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var webpack = require("webpack");
 
 module.exports = {
@@ -22,12 +22,15 @@ module.exports = {
         use: ["babel-loader"]
       },
       {
-        test: /\.css$/,
+        test: /\.less$/,
         include: /app/,
         use: [
-          {
-            loader: "style-loader"
-          },
+          // {
+          //   loader: "style-loader"
+          // },
+
+          MiniCssExtractPlugin.loader,
+
           {
             loader: "css-loader",
             options: {
@@ -35,13 +38,23 @@ module.exports = {
               modules: true,
               localIdentName: "[local]___[hash:base64:5]"
             }
+          },
+          {
+            loader: "less-loader"
           }
+          // use: [{ loader: "style-loader" }, { loader: "css-loader" }]
         ]
       }
     ]
   },
 
-  plugins: [new ExtractTextPlugin({ filename: "style.css" })],
+  plugins: [
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: "styles.css"
+    })
+  ],
   resolve: {
     extensions: ["*", ".js", ".jsx"]
   },

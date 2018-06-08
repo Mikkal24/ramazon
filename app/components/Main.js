@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Navbar from "./mainChildren/Navbar";
 import Footer from "./mainChildren/Footer";
 
-import styles from "./styles.css";
+import styles from "./styles.less";
 
 class Main extends Component {
   componentDidMount() {
@@ -10,9 +10,9 @@ class Main extends Component {
   }
   render = () => {
     return (
-      <div>
+      <div className={styles.mainContainer}>
         <Navbar />
-        <div className={styles.test}>{this.props.children}</div>
+        <div>{this.props.children}</div>
         <Footer />
       </div>
     );
