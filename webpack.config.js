@@ -1,3 +1,6 @@
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var webpack = require("webpack");
+
 module.exports = {
   // This is the entry point or start of our react applicaton
   entry: "./app/app.js",
@@ -20,10 +23,25 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [{ loader: "style-loader" }, { loader: "css-loader" }]
+        include: /app/,
+        use: [
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader",
+            options: {
+              sourceMap: true,
+              modules: true,
+              localIdentName: "[local]___[hash:base64:5]"
+            }
+          }
+        ]
       }
     ]
   },
+
+  plugins: [new ExtractTextPlugin({ filename: "style.css" })],
   resolve: {
     extensions: ["*", ".js", ".jsx"]
   },
