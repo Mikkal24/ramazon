@@ -11,6 +11,4 @@
 # Templates
 
 Minimalist:
-![minimalist][minimalist]
-
-[minimalist](./public/assets/images/boxofzon.png)
+![minimalist](./public/assets/images/boxofzon.png)
