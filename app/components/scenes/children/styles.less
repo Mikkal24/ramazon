@@ -1,0 +1,22 @@
+@gold: #ffca18;
+@rhino: #323b40;
+
+.leftHomeButton {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: @gold;
+  -webkit-clip-path: polygon(0 0, 40% 0, 60% 100%, 0% 100%);
+  clip-path: polygon(0 0, 40% 0, 60% 100%, 0% 100%);
+  transition: left 500ms ease-in;
+}
+
+.rightHomeButton {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  -webkit-clip-path: polygon(40% 0, 100% 0, 100% 100%, 60% 100%);
+  clip-path: polygon(40% 0, 100% 0, 100% 100%, 60% 100%);
+  background-color: @rhino;
+  transition: right 500ms ease-in;
+}

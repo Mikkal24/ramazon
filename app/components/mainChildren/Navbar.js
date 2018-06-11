@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import styles from "./navbarStyles.less";
 
@@ -20,17 +21,17 @@ class Navbar extends Component {
       : styles.topnav;
     return (
       <nav className={responsiveClass}>
-        <a href="#home" className={styles.active}>
+        <Link to="/" className={styles.active}>
           Ramazon
-        </a>
+        </Link>
 
-        <a href="/signin">Sign In</a>
+        <Link to="/signin">Sign In</Link>
 
-        <a href="/about">About</a>
+        <Link to="/about">About</Link>
 
-        <a href="/contact">Contact</a>
+        <Link to="/contact">Contact</Link>
         <a
-          href="javascript:void(0);"
+          to="javascript:void(0);"
           className={styles.icon}
           onClick={this.handleDropDown}
         >

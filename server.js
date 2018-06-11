@@ -2,10 +2,12 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var routes = require("./routes/routes");
 var db = require("./models");
+var compression = require("compression");
 
 var PORT = process.env.PORT || 8000;
 
 var app = express();
+app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
