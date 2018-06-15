@@ -7,7 +7,14 @@ class RightMainButton extends Component {
     super(props);
   }
   render = () => {
-    return <div className={styles.rightHomeButton} />;
+    return (
+      <div className={styles.rightHomeButton}>
+        <div className={styles.container}>
+          <h1>Get You A Box</h1>
+          <div className={styles.box} />
+        </div>
+      </div>
+    );
   };
 }
 

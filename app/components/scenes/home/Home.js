@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import { LeftMainButton, RightMainButton } from "../children/index";
 import styles from "./styles.less";
