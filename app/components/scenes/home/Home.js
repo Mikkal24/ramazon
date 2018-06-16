@@ -14,7 +14,7 @@ class Home extends Component {
         <Link to="/browse">
           <LeftMainButton animationStyle={this.props.animationStyle} />
         </Link>
-        <Link to="/purchase">
+        <Link to="/purchase/selectprice">
           <RightMainButton />
         </Link>
       </div>

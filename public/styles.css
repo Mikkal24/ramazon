@@ -425,7 +425,7 @@ footer div.socialMediaLinks___2Xhnw a:hover svg circle {
 .mainContainer___Sd5Sr {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height: 100%;
 }
 .mainContainer___Sd5Sr .mainSection___Kc3d9 {
   flex: 1 0 auto;

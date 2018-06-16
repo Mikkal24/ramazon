@@ -15,7 +15,6 @@ class Routes extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/browse" component={Browse} />
             <Route path="/purchase/:location" component={Purchase} />
-            <Route exact path="/contact" render={() => <div />} />
             <Route render={() => <div>404</div>} />
           </Switch>
         </Main>
