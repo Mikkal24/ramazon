@@ -16,7 +16,7 @@
   "production": {
     "username": "b6ea18130e7ed1",
     "password": "ca2db408",
-    "database": "ramazon",
+    "database": "heroku_18ac3fd32c7e751",
     "host":
       "mysql://b6ea18130e7ed1:ca2db408@us-cdbr-iron-east-05.cleardb.net/heroku_18ac3fd32c7e751?reconnect=true",
     "dialect": "mysql"
