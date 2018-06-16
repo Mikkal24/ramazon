@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
 import { LeftMainButton, RightMainButton } from "../children/index";
 import styles from "./styles.less";
 
@@ -11,9 +11,12 @@ class Home extends Component {
   render = () => {
     return (
       <div className={styles.homeContainer}>
-        <LeftMainButton animationStyle={this.props.animationStyle} />
-
-        <RightMainButton />
+        <Link to="/browse">
+          <LeftMainButton animationStyle={this.props.animationStyle} />
+        </Link>
+        <Link to="/purchase">
+          <RightMainButton />
+        </Link>
       </div>
     );
   };

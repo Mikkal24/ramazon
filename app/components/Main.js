@@ -6,9 +6,6 @@ import { Navbar, Footer } from "./mainChildren/index";
 import styles from "./styles.less";
 
 class Main extends Component {
-  componentDidMount() {
-    console.log(styles);
-  }
   render = () => {
     return (
       <div className={styles.mainContainer}>
