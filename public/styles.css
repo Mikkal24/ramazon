@@ -260,6 +260,7 @@
   overflow: hidden;
 }
 
+
 footer {
   background: #4f585e;
 }
@@ -426,6 +427,7 @@ footer div.socialMediaLinks___2Xhnw a:hover svg circle {
   display: flex;
   flex-direction: column;
   min-height: 100%;
+  overflow: hidden;
 }
 .mainContainer___Sd5Sr .mainSection___Kc3d9 {
   flex: 1 0 auto;
@@ -433,5 +435,28 @@ footer div.socialMediaLinks___2Xhnw a:hover svg circle {
 }
 .mainContainer___Sd5Sr footer {
   flex-shrink: 0;
+}
+.mainContainer___Sd5Sr.gold___3VPag {
+  background-color: #ffca18;
+}
+.mainContainer___Sd5Sr.rhino___3uWHU {
+  background-color: #323b40;
+}
+
+.enter___20JZi {
+  position: absolute;
+  left: -2000px;
+}
+.enter___20JZi.enterActive___1S-qL {
+  left: 0px;
+  transition: left 1000ms ease-in;
+}
+.exit___2nyj- {
+  position: absolute;
+  left: 0px;
+}
+.exit___2nyj-.exitActive___1m9xi {
+  left: 2000px;
+  transition: left 1000ms ease-in;
 }
 

@@ -1,0 +1,34 @@
+// .leftHomeAnimation {
+//   transition: left 5s ease-in;
+// }
+
+// .enter {
+//   .leftHomeAnimation {
+//     left: -300px;
+//   }
+// }
+
+// .enter.enterActive {
+//   .leftHomeAnimation {
+//     left: 0px;
+//     transition: left 300ms ease-in;
+//   }
+// }
+
+.enter {
+  position: absolute;
+  left: -2000px;
+}
+
+.enter.enterActive {
+  left: 0px;
+  transition: left 1000ms ease-in;
+}
+.exit {
+  position: absolute;
+  left: 0px;
+}
+.exit.exitActive {
+  left: 2000px;
+  transition: left 1000ms ease-in;
+}

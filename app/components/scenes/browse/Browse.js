@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import API from "../../../utils/query";
 
+import styles from "./styles.less";
+
 class Browse extends Component {
   constructor(props) {
     super(props);
@@ -83,7 +85,7 @@ class Browse extends Component {
 
   render = () => {
     return (
-      <div>
+      <div className={styles.content}>
         <button onClick={this.handleBackward}>Backwards</button>
         <img src={this.state.currentItem.image} />
         <button onClick={this.handleForward}>Forwards</button>

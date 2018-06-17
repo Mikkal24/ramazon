@@ -1,7 +1,11 @@
+@gold: #ffca18;
+@rhino: #323b40;
+
 .mainContainer {
   display: flex;
   flex-direction: column;
   min-height: 100%;
+  overflow: hidden;
 
   .mainSection {
     flex: 1 0 auto;
@@ -11,4 +15,12 @@
   footer {
     flex-shrink: 0;
   }
+}
+
+.mainContainer.gold {
+  background-color: @gold;
+}
+
+.mainContainer.rhino {
+  background-color: @rhino;
 }

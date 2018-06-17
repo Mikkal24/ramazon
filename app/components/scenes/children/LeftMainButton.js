@@ -9,7 +9,7 @@ class LeftMainButton extends Component {
 
   render = () => {
     return (
-      <div className={styles.leftHomeButton}>
+      <div className={` ${styles.leftHomeButton}`}>
         <div className={styles.container}>
           <h1>Browse Random</h1>
           <Dice />

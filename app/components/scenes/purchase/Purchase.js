@@ -37,24 +37,28 @@ class Purchase extends Component {
     this.setState({ shippingInfo: shippingInfo });
   };
 
-  getPage = () => {
-    switch (this.props.match.params.location) {
-      case "selectprice":
-        return <SelectPrice setPrice={this.setPrice} />;
-      case "selectcategories":
-        return <SelectCategories setCategories={this.setCategories} />;
-      case "shipping":
-        return <ShippingForm setShippingInfo={this.setShippingInfo} />;
-      case "checkout":
-        return <CheckOut orderInfo={this.state} />;
-      default:
-        return <div>404</div>;
-    }
-  };
-
   render = () => {
-    let page = this.getPage();
-    return <div>{page}</div>;
+    return (
+      <Switch>
+        <Route
+          exact
+          path={`${this.props.match.path}/selectprice`}
+          component={SelectPrice}
+        />
+        <Route
+          path={`${this.props.match.path}/selectcategories`}
+          component={SelectCategories}
+        />
+        <Route
+          path={`${this.props.match.path}/shipping`}
+          component={ShippingForm}
+        />
+        <Route
+          path={`${this.props.match.path}/checkout`}
+          component={CheckOut}
+        />
+      </Switch>
+    );
   };
 }
 
