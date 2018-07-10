@@ -162,6 +162,16 @@
     transform: translate3d(-200px, -50px, -400px);
   }
 }
+
+.platform {
+  width: 200px;
+  height: 200px;
+  transform-style: preserve-3d;
+  animation: roll 1.6s infinite linear;
+  .dice {
+    animation: spin-duplicate 2s infinite linear;
+  }
+}
 // #roll {
 //   &:checked {
 //     & ~ .platform {

@@ -65,6 +65,7 @@ var amazonSearch = function(cb) {
   sortArr = sortOptions.whichIndex(searchIndex); //decide what search paramater to use
   sort = sortArr[Math.floor(Math.random() * sortArr.length)];
 
+  console.log("searching");
   opHelper
     .execute("ItemSearch", {
       SearchIndex: searchIndex,
@@ -78,10 +79,12 @@ var amazonSearch = function(cb) {
       ResponseGroup: "ItemAttributes,Offers,Images"
     })
     .then(response => {
+      console.log(response);
       var handler = handleSearchResults.bind(this);
       handler(response, cb);
     })
     .catch(err => {
+      if (err) return console.log(err);
       self.randomPage = 1;
       var newSearch = amazonSearch.bind(this);
       newSearch(cb);
@@ -138,6 +141,7 @@ function handleSearchResults(response, cb) {
 // }
 
 router.get("/", function(req, res) {
+  console.log("searching for one random item");
   /************************************************
    *            GET ONE RANDOM ITEM                *
    ************************************************/
@@ -154,6 +158,7 @@ router.get("/", function(req, res) {
 
   var mySearch = amazonSearch.bind(queryObj);
   mySearch(function(itemArray) {
+    console.log(itemArray);
     res.json(itemArray);
   });
 });

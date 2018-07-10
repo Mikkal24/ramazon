@@ -1,0 +1,52 @@
+@gold: #ffca18;
+@rhino: #323b40;
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .topColor {
+    width: 100%;
+    height: 200px;
+    clip-path: polygon(0 0, 100% 100%, 100% 0);
+    background-color: @rhino;
+    position: relative;
+    flex: 1;
+
+    div {
+      width: 100%;
+      height: 150px;
+      clip-path: polygon(0 0, 100% 100%, 100% 0);
+      background-color: @gold;
+      position: absolute;
+    }
+  }
+
+  .centerBox {
+    flex: 3;
+  }
+
+  .bottomColor {
+    width: 100%;
+    height: 200px;
+    bottom: 0;
+    flex: 1;
+    clip-path: polygon(0 100%, 100% 100%, 0 0);
+    background-color: @gold;
+    position: relative;
+
+    div {
+      width: 100%;
+      height: 150px;
+      clip-path: polygon(0 100%, 100% 100%, 0 0);
+      background-color: @rhino;
+      bottom: 0;
+      position: absolute;
+    }
+  }
+}

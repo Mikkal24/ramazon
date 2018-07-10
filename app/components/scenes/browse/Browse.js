@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import API from "../../../utils/query";
+import DiceSpinner from "../children/DiceSpinner";
+import styles from "./styles.less";
 
 class Browse extends Component {
   constructor(props) {
@@ -17,16 +19,16 @@ class Browse extends Component {
         pastSearches: [],
         showBackArrow: false
       },
-      displaySpinner: true
+      displaySpinner: false
     };
   }
 
   componentDidMount = () => {
-    console.log("browse mounted");
     this.search();
   };
 
   search = () => {
+    console.log("searching...");
     API.getOneRandom().then(res => {
       console.log(res);
       let data = res.data[0];
@@ -50,7 +52,8 @@ class Browse extends Component {
 
       this.setState({
         currentItem: currentItem,
-        history: history
+        history: history,
+        displaySpinner: false
       });
     });
   };
@@ -59,6 +62,7 @@ class Browse extends Component {
     e.preventDefault();
     let history = this.state.history;
     if (history.currentCount === history.maxCount) {
+      this.setState({ displaySpinner: true });
       this.search();
     } else {
       history.currentCount++;
@@ -83,10 +87,24 @@ class Browse extends Component {
 
   render = () => {
     return (
-      <div>
-        <button onClick={this.handleBackward}>Backwards</button>
-        <img src={this.state.currentItem.image} />
-        <button onClick={this.handleForward}>Forwards</button>
+      <div className={styles.container}>
+        <div className={styles.topColor}>
+          <div />
+        </div>
+        <div className={styles.centerBox}>
+          {this.state.displaySpinner ? (
+            <DiceSpinner />
+          ) : (
+            <div>
+              <button onClick={this.handleBackward}>Backwards</button>
+              <img src={this.state.currentItem.image} />
+              <button onClick={this.handleForward}>Forwards</button>
+            </div>
+          )}
+        </div>
+        <div className={styles.bottomColor}>
+          <div />
+        </div>
       </div>
     );
   };
